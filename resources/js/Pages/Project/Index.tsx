@@ -1,11 +1,29 @@
 import Pagination from '@/Components/Pagination';
+import SelectInput from '@/Components/SelectInput';
+import TextInput from '@/Components/TextInput';
 import { PROJECT_STATUS_CLASS_MAP, PROJECT_STATUS_TEXT_MAP } from '@/constants';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, router } from '@inertiajs/react';
 
 interface IndexProps {}
 
-export default function Index({ projects }: any) {
+export default function Index({ projects, queryParams = null }: any) {
+    queryParams = queryParams || {};
+    const search = (name: string, value: string) => {
+        if (value) {
+            queryParams[name] = value;
+        } else {
+            delete queryParams[name];
+        }
+
+        router.get(route('project.index'), queryParams);
+    };
+
+    const onKeyPress = (name: string, e: any) => {
+        if (e.key !== 'Enter') return;
+
+        search(name, e.target.value);
+    };
     return (
         <Authenticated
             //user={auth.user}
@@ -34,6 +52,57 @@ export default function Index({ projects }: any) {
                                         <td scope="col">Deadline</td>
                                         <td scope="col">Creator</td>
                                         <td scope="col">Actions</td>
+                                    </tr>
+                                </thead>
+                                <thead>
+                                    <tr>
+                                        <th scope="col"></th>
+                                        <td scope="col"></td>
+                                        <td scope="col">
+                                            <TextInput
+                                                placeholder="Project name"
+                                                defaultValue={queryParams.name}
+                                                onBlur={(e) =>
+                                                    search(
+                                                        'name',
+                                                        e.target.value,
+                                                    )
+                                                }
+                                                onKeyPress={(e) =>
+                                                    onKeyPress('name', e)
+                                                }
+                                            />
+                                        </td>
+                                        <td scope="col">
+                                            <SelectInput
+                                                defaultValue={
+                                                    queryParams.status
+                                                }
+                                                onChange={(e) =>
+                                                    search(
+                                                        'status',
+                                                        e.target.value,
+                                                    )
+                                                }
+                                            >
+                                                <option value="">
+                                                    Select Status
+                                                </option>
+                                                <option value="pending">
+                                                    Pending
+                                                </option>
+                                                <option value="active">
+                                                    Active
+                                                </option>
+                                                <option value="finished">
+                                                    Finished
+                                                </option>
+                                            </SelectInput>
+                                        </td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
                                     </tr>
                                 </thead>
                                 <tbody>
