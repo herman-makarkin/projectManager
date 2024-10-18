@@ -1,13 +1,13 @@
 import Pagination from '@/Components/Pagination';
 import SelectInput from '@/Components/SelectInput';
 import TextInput from '@/Components/TextInput';
-import { PROJECT_STATUS_CLASS_MAP, PROJECT_STATUS_TEXT_MAP } from '@/constants';
+//import { TASK_STATUS_CLASS_MAP, TASK_STATUS_TEXT_MAP } from '@/constants';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, router } from '@inertiajs/react';
 
 interface IndexProps {}
 
-export default function Index({ projects, queryParams = null }: any) {
+export default function Index({ tasks, queryParams = null }: any) {
     queryParams = queryParams || {};
     const search = (name: string, value: string) => {
         if (value) {
@@ -16,7 +16,7 @@ export default function Index({ projects, queryParams = null }: any) {
             delete queryParams[name];
         }
 
-        router.get(route('project.index'), queryParams);
+        router.get(route('task.index'), queryParams);
     };
 
     const onKeyPress = (name: string, e: any) => {
@@ -36,22 +36,26 @@ export default function Index({ projects, queryParams = null }: any) {
             queryParams.sort_field = name;
             queryParams.sort_mode = 'asc';
         }
-        router.get(route('project.index'), queryParams);
+        router.get(route('task.index'), queryParams);
     };
     return (
         <Authenticated
             //user={auth.user}
-            header={<h2 className="text-gray fs-3">Projects</h2>}
+            header={
+                <h2 className="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
+                    Tasks
+                </h2>
+            }
         >
-            <Head title="Projects" />
+            <Head title="Tasks" />
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800">
-                        <div className="bg-gray pb-2 pt-2">
+                        <div className="bg-gray">
                             {/* <pre className="text-gray">
-                                {JSON.stringify(projects, undefined, 2)}
+                                {JSON.stringify(tasks, undefined, 2)}
                             </pre> */}
-                            <table className="table">
+                            <table className="table-dark table">
                                 <thead>
                                     <tr>
                                         <th
@@ -92,9 +96,7 @@ export default function Index({ projects, queryParams = null }: any) {
                                             Deadline
                                         </td>
                                         <td scope="col">Creator</td>
-                                        <td scope="col">
-                                            <p className="text-end">Actions</p>
-                                        </td>
+                                        <td scope="col">Actions</td>
                                     </tr>
                                 </thead>
                                 <thead>
@@ -103,7 +105,7 @@ export default function Index({ projects, queryParams = null }: any) {
                                         <td scope="col"></td>
                                         <td scope="col">
                                             <TextInput
-                                                placeholder="Project name"
+                                                placeholder="Task name"
                                                 defaultValue={queryParams.name}
                                                 onBlur={(e) =>
                                                     search(
@@ -149,63 +151,49 @@ export default function Index({ projects, queryParams = null }: any) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {projects.data.map((project: any) => (
-                                        <tr key={project.id}>
-                                            <td>{project.id}</td>
+                                    {tasks.data.map((task: any) => (
+                                        <tr key={task.id}>
+                                            <td>{task.id}</td>
                                             <td
                                                 style={{
                                                     maxWidth: 100,
                                                 }}
                                             >
                                                 <img
-                                                    src={project.image_path}
+                                                    src={task.image_path}
                                                     alt=""
                                                 />
                                             </td>
+                                            <td>{task.name}</td>
+                                            <td
+                                            // className={
+                                            //     //TASK_STATUS_CLASS_MAP[
+                                            //       //</tr>  task.status
+                                            //     ]
+                                            // }
+                                            >
+                                                {/* {
+                                                    //TASK_STATUS_TEXT_MAP[
+                                                      //</tbody>  task.status
+                                                    ]
+                                                } */}
+                                            </td>
+                                            <td>{task.created_at}</td>
+                                            <td>{task.deadline}</td>
+                                            <td>{task.creator.name}</td>
                                             <td>
                                                 <Link
                                                     href={route(
-                                                        'project.show',
-                                                        project.id,
-                                                    )}
-                                                >
-                                                    {project.name}
-                                                </Link>
-                                            </td>
-                                            <td className="position-relative">
-                                                <span
-                                                    className={
-                                                        PROJECT_STATUS_CLASS_MAP[
-                                                            project.status
-                                                        ] +
-                                                        ' position-absolute top-50 start-50 translate-middle'
-                                                    }
-                                                >
-                                                    {
-                                                        PROJECT_STATUS_TEXT_MAP[
-                                                            project.status
-                                                        ]
-                                                    }
-                                                </span>
-                                            </td>
-                                            <td>{project.created_at}</td>
-                                            <td>{project.deadline}</td>
-                                            <td>{project.creator.name}</td>
-                                            <td>
-                                                <Link
-                                                    className="text-success"
-                                                    href={route(
-                                                        'project.edit',
-                                                        project.id,
+                                                        'task.edit',
+                                                        task.id,
                                                     )}
                                                 >
                                                     Edit
                                                 </Link>
                                                 <Link
-                                                    className="text-danger ms-2"
                                                     href={route(
-                                                        'project.destroy',
-                                                        project.id,
+                                                        'task.destroy',
+                                                        task.id,
                                                     )}
                                                 >
                                                     Destroy
@@ -215,9 +203,7 @@ export default function Index({ projects, queryParams = null }: any) {
                                     ))}
                                 </tbody>
                             </table>
-                            <div className="d-flex flex-column justify-content-center align-items-center">
-                                <Pagination links={projects.meta.links} />
-                            </div>
+                            <Pagination links={tasks.meta.links} />
                         </div>
                     </div>
                 </div>

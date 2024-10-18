@@ -15,18 +15,18 @@ export default function Authenticated({
         useState(false);
 
     return (
-        <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
-            <nav className="border-b border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="flex h-16 justify-between">
-                        <div className="flex">
-                            <div className="flex shrink-0 items-center">
+        <div className="">
+            <nav className="navbar navbar-expand-md sticky-top border-bottom-2 bg-white pe-3 ps-3">
+                <div className="w-100">
+                    <div className="d-flex justify-content-between">
+                        <div className="d-flex">
+                            <div className="d-flex flex-column justify-content-center">
                                 <Link href="/">
                                     <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                                 </Link>
                             </div>
 
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            <ul className="navbar-nav bd-navbar-nav ms-3 flex-row flex-wrap">
                                 <NavLink
                                     href={route('dashboard')}
                                     active={route().current('dashboard')}
@@ -45,7 +45,7 @@ export default function Authenticated({
                                 >
                                     Tasks
                                 </NavLink>
-                            </div>
+                            </ul>
                         </div>
 
                         <div className="hidden sm:ms-6 sm:flex sm:items-center">
@@ -178,7 +178,7 @@ export default function Authenticated({
             </nav>
 
             {header && (
-                <header className="bg-white shadow dark:bg-gray-800">
+                <header className="bg-white shadow">
                     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                         {header}
                     </div>

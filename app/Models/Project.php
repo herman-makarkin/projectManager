@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Project extends Model
 {
@@ -15,11 +16,11 @@ class Project extends Model
         return $this->hasMany(Task::class);
     }
 
-    public function creator()
+    public function createdBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'creator');
     }
-    public function updatedBy()
+    public function updatedBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'updated_by');
     }

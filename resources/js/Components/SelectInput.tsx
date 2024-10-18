@@ -19,22 +19,8 @@ export default forwardRef(function SelectInput(
         focus: () => localRef.current?.focus(),
     }));
 
-    // useEffect(() => {
-    //     if (isFocused) {
-    //         localRef.current?.focus();
-    //     }
-    // }, [isFocused]);
-
     return (
-        <select
-            {...props}
-            //type={type}
-            className={
-                'rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600 ' +
-                className
-            }
-            ref={localRef}
-        >
+        <select {...props} className={'form-select ' + className}>
             {children}
         </select>
     );
