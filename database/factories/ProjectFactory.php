@@ -25,6 +25,8 @@ class ProjectFactory extends Factory
             'description' => fake()->realText(),
             'creator' => 1,
             'updated_by' => 1,
+            'created_at' => time(),
+            'updated_at' => time(),
         ];
     }
 }
