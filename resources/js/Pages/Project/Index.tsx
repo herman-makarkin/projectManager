@@ -9,7 +9,7 @@ interface IndexProps {}
 
 export default function Index({ projects, queryParams = null, success }: any) {
     queryParams = queryParams || {};
-    const search = (name: string, value: string) => {
+    const search = (name: string, value: string): void => {
         if (value) {
             queryParams[name] = value;
         } else {
@@ -19,13 +19,13 @@ export default function Index({ projects, queryParams = null, success }: any) {
         router.get(route('project.index'), queryParams);
     };
 
-    const onKeyPress = (name: string, e: any) => {
+    const onKeyPress = (name: string, e: any): void => {
         if (e.key !== 'Enter') return;
 
         search(name, e.target.value);
     };
 
-    const sortChanged = (name: string) => {
+    const sortChanged = (name: string): void => {
         if (name === queryParams[name]) {
             if (queryParams.sort_mode === 'asc') {
                 queryParams.sort_mode = 'desc';
@@ -37,6 +37,13 @@ export default function Index({ projects, queryParams = null, success }: any) {
             queryParams.sort_mode = 'asc';
         }
         router.get(route('project.index'), queryParams);
+    };
+
+    const removeProject = (project: any): void => {
+        if (window.confirm('Are you sure you want to remove this project?')) {
+            router.delete(route('project.destroy', project.id));
+        }
+        return;
     };
     return (
         <Authenticated
@@ -181,15 +188,12 @@ export default function Index({ projects, queryParams = null, success }: any) {
                                     >
                                         Edit
                                     </Link>
-                                    <Link
+                                    <button
                                         className="text-danger ms-2"
-                                        href={route(
-                                            'project.destroy',
-                                            project.id,
-                                        )}
+                                        onClick={() => removeProject(project)}
                                     >
-                                        Destroy
-                                    </Link>
+                                        Remove
+                                    </button>
                                 </td>
                             </tr>
                         ))}
