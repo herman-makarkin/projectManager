@@ -9,9 +9,6 @@ use App\Models\Task;
 
 class TaskController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $query = Task::query();
@@ -27,11 +24,9 @@ class TaskController extends Controller
 
         $tasks = $query->orderBy($sortField, $sortMode)->paginate(10);
         return inertia("Task/Index", [
-            //$projects
             "tasks" => TaskResource::collection($tasks),
             'queryParams' => request()->query() ?: null,
         ]);
-        //
     }
 
     /**
