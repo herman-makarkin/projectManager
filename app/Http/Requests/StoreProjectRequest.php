@@ -23,8 +23,8 @@ class StoreProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'max:100'],
-            'image' => ['nullable', 'image'],
+            'name' => ['required', 'max:255'],
+            'image' => ['nullable', 'image', 'max:2048'],
             'description' => ['string'],
             'deadline' => ['nullable', 'date'],
             'status' => ['required', Rule::in(['pending', 'active', 'finished'])],

@@ -8,9 +8,6 @@ const Show = ({ project, tasks, queryParams }: any) => {
             header={<h2 className="fs-3">{`Project "${project.name}"`}</h2>}
         >
             <Head title={`Project "${project.name}"`} />
-            {/* <div className="py-12">
-                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800"> */}
             <div className="bg-gray">
                 <div>
                     <img src={project.image_path} alt="" />
@@ -33,9 +30,6 @@ const Show = ({ project, tasks, queryParams }: any) => {
                 queryParams={queryParams}
                 projectColumn={false}
             />
-            {/* </div>
-                </div>
-            </div> */}
         </Authenticated>
     );
 };

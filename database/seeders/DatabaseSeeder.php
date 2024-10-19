@@ -19,15 +19,15 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Herman',
             'email' => 'german.makarkin@gmail.com',
-            //'gender' => 'Male',
-            //'age' => 33,
+            'gender' => 'Male',
+            'birthdate' => '2000/01/01',
             'password' => bcrypt('mypassword123'),
             'email_verified_at' => time(),
         ]);
 
         Project::factory()
-        ->count(20)
-        ->hasTasks(20)
-        ->create();
+            ->count(20)
+            ->hasTasks(20)
+            ->create();
     }
 }

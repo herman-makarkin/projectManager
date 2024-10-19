@@ -1,6 +1,7 @@
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
+import SelectInput from '@/Components/SelectInput';
 import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
@@ -10,6 +11,8 @@ export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
+        birthdate: '',
+        gender: '',
         password: '',
         password_confirmation: '',
     });
@@ -59,6 +62,40 @@ export default function Register() {
                     />
 
                     <InputError message={errors.email} className="mt-2" />
+                </div>
+
+                <div className="mt-4">
+                    <InputLabel htmlFor="birthdate" value="Birthdate" />
+
+                    <TextInput
+                        id="birthdate"
+                        type="date"
+                        name="birthdate"
+                        value={data.birthdate}
+                        className="mt-1 block w-full"
+                        onChange={(e) => setData('birthdate', e.target.value)}
+                        required
+                    />
+
+                    <InputError message={errors.birthdate} className="mt-2" />
+                </div>
+
+                <div className="mt-4">
+                    <InputLabel htmlFor="gender" value="Gender" />
+
+                    <SelectInput
+                        id="email"
+                        name="gender"
+                        value={data.gender}
+                        className="mt-1 block w-full"
+                        onChange={(e) => setData('gender', e.target.value)}
+                        required
+                    >
+                        <option value="Male">Male</option>
+                        <option value="Male">Female</option>
+                    </SelectInput>
+
+                    <InputError message={errors.birthdate} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
