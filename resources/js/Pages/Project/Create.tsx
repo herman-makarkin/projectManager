@@ -17,7 +17,6 @@ const Create = () => {
 
     const onSubmit = (e: any) => {
         e.preventDefault();
-        console.log(e.preventDefault());
         post(route('project.store'));
     };
     return (
