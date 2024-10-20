@@ -8,7 +8,7 @@ const Show = ({ project, tasks, queryParams }: any) => {
             header={<h2 className="fs-3">{`Project "${project.name}"`}</h2>}
         >
             <Head title={`Project "${project.name}"`} />
-            <div className="bg-gray">
+            <div className="">
                 <div>
                     <img src={project.image_path} alt="" />
                 </div>

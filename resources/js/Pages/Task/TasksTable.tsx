@@ -87,7 +87,7 @@ const TasksTable = ({ tasks, queryParams, projectColumn = true }: any) => {
                                 placeholder="Task name"
                                 defaultValue={queryParams.name}
                                 onBlur={(e) => search('name', e.target.value)}
-                                onKeyPress={(e) => onKeyPress('name', e)}
+                                onKeyDown={(e) => onKeyPress('name', e)}
                             />
                         </td>
                         <td scope="col">

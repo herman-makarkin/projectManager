@@ -18,7 +18,7 @@ const Edit = ({ user }: any) => {
         // description: '',
     });
 
-    const onSubmit = (e: any) => {
+    const onSubmit: FormEventHandler = (e) => {
         e.preventDefault();
         post(route('user.update', user.id));
     };

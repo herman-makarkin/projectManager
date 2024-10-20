@@ -116,16 +116,17 @@ export default function Index({ users, queryParams = null, success }: any) {
                                     onBlur={(e) =>
                                         search('name', e.target.value)
                                     }
-                                    onKeyPress={(e) => onKeyPress('name', e)}
+                                    onKeyDown={(e) => onKeyPress('name', e)}
                                 />
                             </td>
                             <td scope="col">
                                 <TextInput
                                     defaultValue={queryParams.email}
                                     placeholder="User email"
-                                    onChange={(e) =>
-                                        search('status', e.target.value)
+                                    onBlur={(e) =>
+                                        search('email', e.target.value)
                                     }
+                                    onKeyDown={(e) => onKeyPress('email', e)}
                                 />
                             </td>
                             <td scope="col"></td>

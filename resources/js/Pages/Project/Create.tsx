@@ -5,6 +5,7 @@ import TextAreaInput from '@/Components/TextAreaInput';
 import TextInput from '@/Components/TextInput';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
 import { Link, useForm } from '@inertiajs/react';
+import { FormEventHandler } from 'react';
 
 const Create = () => {
     const { data, setData, post, errors, reset } = useForm({
@@ -15,7 +16,7 @@ const Create = () => {
         deadline: '',
     });
 
-    const onSubmit = (e: any) => {
+    const onSubmit: FormEventHandler = (e: any) => {
         e.preventDefault();
         post(route('project.store'));
     };

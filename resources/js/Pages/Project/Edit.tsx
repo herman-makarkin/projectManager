@@ -5,6 +5,7 @@ import TextAreaInput from '@/Components/TextAreaInput';
 import TextInput from '@/Components/TextInput';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
 import { Link, useForm } from '@inertiajs/react';
+import { FormEventHandler } from 'react';
 
 const Edit = ({ project }: any) => {
     const { data, setData, post, errors, reset } = useForm({
@@ -16,7 +17,7 @@ const Edit = ({ project }: any) => {
         _method: 'PUT',
     });
 
-    const onSubmit = (e: any) => {
+    const onSubmit: FormEventHandler = (e) => {
         e.preventDefault();
         post(route('project.update', project.id));
     };
