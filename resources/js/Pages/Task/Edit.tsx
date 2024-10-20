@@ -29,7 +29,7 @@ const Edit = ({ task, projects, users }: any) => {
             header={<h2 className="text-gray fs-3">Edit "{task.name}"</h2>}
         >
             <form onSubmit={onSubmit}>
-                <div>
+                <div style={{ maxWidth: 500 }}>
                     {task.image_path && <img src={task.image_path} />}
                     <InputLabel htmlFor="task_image_path" value="Task Image" />
                     <TextInput
@@ -40,7 +40,7 @@ const Edit = ({ task, projects, users }: any) => {
                     />
                     <InputError message={errors.image} />
                 </div>
-                <div>
+                <div className="mt-3">
                     <InputLabel htmlFor="task_name" value="Task Name" />
                     <TextInput
                         id="task_name"
@@ -52,7 +52,7 @@ const Edit = ({ task, projects, users }: any) => {
                     />
                     <InputError message={errors.name} />
                 </div>
-                <div>
+                <div className="mt-3">
                     <InputLabel htmlFor="task_deadline" value="Deadline" />
                     <TextInput
                         id="task_deadline"
@@ -63,7 +63,7 @@ const Edit = ({ task, projects, users }: any) => {
                     />
                     <InputError message={errors.name} />
                 </div>
-                <div>
+                <div className="mt-3">
                     <InputLabel
                         htmlFor="task_description"
                         value="Description"
@@ -76,7 +76,7 @@ const Edit = ({ task, projects, users }: any) => {
                     />
                     <InputError message={errors.description} />
                 </div>
-                <div>
+                <div className="mt-3">
                     <InputLabel htmlFor="task_priority" value="Priority" />
 
                     <SelectInput
@@ -88,7 +88,7 @@ const Edit = ({ task, projects, users }: any) => {
                     ></SelectInput>
                     <InputError message={errors.priority} />
                 </div>
-                <div>
+                <div className="mt-3">
                     <InputLabel htmlFor="task_status" value="status" />
 
                     <SelectInput
@@ -100,7 +100,7 @@ const Edit = ({ task, projects, users }: any) => {
                     ></SelectInput>
                     <InputError message={errors.status} />
                 </div>
-                <div>
+                <div className="mt-3">
                     <InputLabel htmlFor="task_project_id" value="Project id" />
 
                     <SelectInput
@@ -119,7 +119,7 @@ const Edit = ({ task, projects, users }: any) => {
 
                     <InputError message={errors.project_id} />
                 </div>
-                <div>
+                <div className="mt-3">
                     <InputLabel
                         htmlFor="task_assigned_user_id"
                         value="assigned user id"
@@ -143,15 +143,15 @@ const Edit = ({ task, projects, users }: any) => {
 
                     <InputError message={errors.assigned_user_id} />
                 </div>
-                <div>
+                <div className="d-flex mt-4 flex-row-reverse">
+                    <input
+                        type="submit"
+                        className="btn btn-success ms-3"
+                        value="Submit"
+                    />
                     <Link href={route('task.index')} className="btn btn-danger">
                         Cancel
                     </Link>
-                    <input
-                        type="submit"
-                        className="btn btn-success"
-                        value="Submit"
-                    />
                 </div>
             </form>
         </Authenticated>

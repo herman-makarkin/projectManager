@@ -31,7 +31,7 @@ const Edit = ({ project }: any) => {
         >
             <form onSubmit={onSubmit}>
                 {project.image_path && (
-                    <div>
+                    <div style={{ maxWidth: 500 }}>
                         <img src={project.image_path} alt="" />
                     </div>
                 )}
@@ -96,18 +96,18 @@ const Edit = ({ project }: any) => {
                     ></SelectInput>
                     <InputError message={errors.status} />
                 </div>
-                <div>
+                <div className="d-flex mt-4 flex-row-reverse">
+                    <input
+                        type="submit"
+                        className="btn btn-success ms-3"
+                        value="Submit"
+                    />
                     <Link
                         href={route('project.index')}
                         className="btn btn-danger"
                     >
                         Cancel
                     </Link>
-                    <input
-                        type="submit"
-                        className="btn btn-success"
-                        value="Submit"
-                    />
                 </div>
             </form>
         </Authenticated>

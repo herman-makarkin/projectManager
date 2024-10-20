@@ -163,7 +163,7 @@ const TasksTable = ({ tasks, queryParams, projectColumn = true }: any) => {
                                     className="text-danger ms-2"
                                     onClick={() => removeTask(task)}
                                 >
-                                    Destroy
+                                    Remove
                                 </button>
                             </td>
                         </tr>

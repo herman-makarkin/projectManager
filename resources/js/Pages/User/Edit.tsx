@@ -4,6 +4,7 @@ import SelectInput from '@/Components/SelectInput';
 import TextInput from '@/Components/TextInput';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
 import { Link, useForm } from '@inertiajs/react';
+import { FormEventHandler } from 'react';
 
 const Edit = ({ user }: any) => {
     const { data, setData, post, errors, reset } = useForm({
@@ -52,7 +53,7 @@ const Edit = ({ user }: any) => {
                     />
                     <InputError message={errors.name} />
                 </div>
-                <div>
+                <div className="mt-3">
                     <InputLabel htmlFor="user_email" value="User email" />
                     <TextInput
                         id="user_email"
@@ -63,7 +64,7 @@ const Edit = ({ user }: any) => {
                     />
                     <InputError message={errors.name} />
                 </div>
-                <div>
+                <div className="mt-3">
                     <InputLabel htmlFor="user_birthdate" value="Birthdate" />
                     <TextInput
                         id="user_birthdate"
@@ -87,7 +88,7 @@ const Edit = ({ user }: any) => {
                     />
                     <InputError message={errors.description} />
                 </div> */}
-                <div>
+                <div className="mt-3">
                     <InputLabel htmlFor="user_gender" value="Gender" />
 
                     <SelectInput
@@ -99,7 +100,7 @@ const Edit = ({ user }: any) => {
                     ></SelectInput>
                     <InputError message={errors.gender} />
                 </div>
-                <div className="mt-4">
+                <div className="mt-3">
                     <InputLabel htmlFor="password" value="Password" />
 
                     <TextInput
@@ -113,7 +114,7 @@ const Edit = ({ user }: any) => {
 
                     <InputError message={errors.password} className="mt-2" />
                 </div>
-                <div className="mt-4">
+                <div className="mt-3">
                     <InputLabel
                         htmlFor="password_confirmation"
                         value="Password Confirmation"
@@ -132,15 +133,15 @@ const Edit = ({ user }: any) => {
 
                     <InputError message={errors.password} className="mt-2" />
                 </div>
-                <div>
+                <div className="d-flex mt-4 flex-row-reverse">
+                    <input
+                        type="submit"
+                        className="btn btn-success ms-3"
+                        value="Submit"
+                    />
                     <Link href={route('user.index')} className="btn btn-danger">
                         Cancel
                     </Link>
-                    <input
-                        type="submit"
-                        className="btn btn-success"
-                        value="Submit"
-                    />
                 </div>
             </form>
         </Authenticated>

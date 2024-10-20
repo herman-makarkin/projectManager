@@ -6,13 +6,15 @@ export default function Pagination({ links }: any) {
             {links.map((link: any, i: number) => (
                 <Link
                     className={
-                        'page-item page-link ' + (link.active ? 'active' : '')
+                        'page-item page-link ' +
+                        (link.active ? 'active' : '') +
+                        (!link.url ? 'text-secondary' : '')
                     }
                     preserveScroll
                     key={i}
                     href={link.url || ''}
                     dangerouslySetInnerHTML={{ __html: link.label }}
-                ></Link>
+                />
             ))}
         </nav>
     );

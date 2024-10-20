@@ -113,7 +113,7 @@ export default function Index({ projects, queryParams = null, success }: any) {
                                     onBlur={(e) =>
                                         search('name', e.target.value)
                                     }
-                                    onKeyPress={(e) => onKeyPress('name', e)}
+                                    onKeyDown={(e) => onKeyPress('name', e)}
                                 />
                             </td>
                             <td scope="col">
@@ -145,6 +145,7 @@ export default function Index({ projects, queryParams = null, success }: any) {
                                     className="align-middle"
                                     style={{
                                         maxWidth: 100,
+                                        maxHeight: 60,
                                     }}
                                 >
                                     <img src={project.image_path} alt="" />
