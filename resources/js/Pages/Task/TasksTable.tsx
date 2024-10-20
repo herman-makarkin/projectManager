@@ -4,7 +4,12 @@ import TextInput from '@/Components/TextInput';
 import { TASK_STATUS_CLASS_MAP, TASK_STATUS_TEXT_MAP } from '@/constants';
 import { Link, router } from '@inertiajs/react';
 
-const TasksTable = ({ tasks, queryParams, projectColumn = true }: any) => {
+const TasksTable = ({
+    tasks,
+    queryParams,
+    projectColumn = true,
+    actions = true,
+}: any) => {
     queryParams = queryParams || {};
     const search = (name: string, value: string) => {
         if (value) {
@@ -72,9 +77,11 @@ const TasksTable = ({ tasks, queryParams, projectColumn = true }: any) => {
                             Deadline
                         </td>
                         <td scope="col">Creator</td>
-                        <td scope="col">
-                            <p className="text-end">Actions</p>
-                        </td>
+                        {actions && (
+                            <td scope="col">
+                                <p className="text-end">Actions</p>
+                            </td>
+                        )}
                     </tr>
                 </thead>
                 <thead>
@@ -106,7 +113,7 @@ const TasksTable = ({ tasks, queryParams, projectColumn = true }: any) => {
                         <td scope="col"></td>
                         <td scope="col"></td>
                         <td scope="col"></td>
-                        <td scope="col"></td>
+                        {actions && <td scope="col"></td>}
                     </tr>
                 </thead>
                 <tbody>
@@ -152,20 +159,22 @@ const TasksTable = ({ tasks, queryParams, projectColumn = true }: any) => {
                             <td className="align-middle">
                                 {task.creator.name}
                             </td>
-                            <td className="align-middle">
-                                <Link
-                                    className="text-success"
-                                    href={route('task.edit', task.id)}
-                                >
-                                    Edit
-                                </Link>
-                                <button
-                                    className="text-danger ms-2"
-                                    onClick={() => removeTask(task)}
-                                >
-                                    Remove
-                                </button>
-                            </td>
+                            {actions && (
+                                <td className="align-middle">
+                                    <Link
+                                        className="text-success"
+                                        href={route('task.edit', task.id)}
+                                    >
+                                        Edit
+                                    </Link>
+                                    <button
+                                        className="text-danger ms-2"
+                                        onClick={() => removeTask(task)}
+                                    >
+                                        Remove
+                                    </button>
+                                </td>
+                            )}
                         </tr>
                     ))}
                 </tbody>

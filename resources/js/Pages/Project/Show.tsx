@@ -86,6 +86,7 @@ const Show = ({ project, tasks, queryParams }: any) => {
                 tasks={tasks}
                 queryParams={queryParams}
                 projectColumn={false}
+                actions={false}
             />
         </Authenticated>
     );
