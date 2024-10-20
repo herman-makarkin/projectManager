@@ -79,13 +79,10 @@ const Create = () => {
                     <SelectInput
                         id="project_status"
                         name="status"
+                        type="status"
                         value={data.status}
                         onChange={(e) => setData('status', e.target.value)}
-                    >
-                        <option value="">Select Status</option>
-                        <option value="active">Active</option>
-                        <option value="inactive">Inactive</option>
-                    </SelectInput>
+                    ></SelectInput>
                     <InputError message={errors.status} />
                 </div>
                 <div>

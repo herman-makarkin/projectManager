@@ -35,6 +35,14 @@ const TasksTable = ({ tasks, queryParams, projectColumn = true }: any) => {
         }
         router.get(route('task.index'), queryParams);
     };
+
+    const removeTask = (task: any): void => {
+        if (window.confirm('Are you sure you want to remove this project?')) {
+            router.delete(route('task.destroy', task.id));
+        }
+        return;
+    };
+
     return (
         <div className="bg-gray pb-2 pt-2">
             <table className="table">
@@ -113,14 +121,23 @@ const TasksTable = ({ tasks, queryParams, projectColumn = true }: any) => {
                                 <img src={task.image_path} alt="" />
                             </td>
                             {projectColumn && (
-                                <td scope="col">{task.project.name}</td>
+                                <td scope="col">
+                                    <Link
+                                        href={route(
+                                            'project.show',
+                                            task.project.id,
+                                        )}
+                                    >
+                                        {task.project.name}
+                                    </Link>
+                                </td>
                             )}
                             <td className="align-middle">
                                 <Link href={route('task.show', task.id)}>
                                     {task.name}
                                 </Link>
                             </td>
-                            <td className="" className="align-middle">
+                            <td className="align-middle">
                                 <span
                                     className={
                                         TASK_STATUS_CLASS_MAP[task.status] +
@@ -142,12 +159,12 @@ const TasksTable = ({ tasks, queryParams, projectColumn = true }: any) => {
                                 >
                                     Edit
                                 </Link>
-                                <Link
+                                <button
                                     className="text-danger ms-2"
-                                    href={route('task.destroy', task.id)}
+                                    onClick={() => removeTask(task)}
                                 >
                                     Destroy
-                                </Link>
+                                </button>
                             </td>
                         </tr>
                     ))}

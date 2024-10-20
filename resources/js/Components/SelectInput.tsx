@@ -47,6 +47,21 @@ export default forwardRef(function SelectInput(
                 Finished
             </option>,
         ];
+    } else if (type === 'priority') {
+        children = [
+            <option value="" key="1">
+                Select Priority
+            </option>,
+            <option value="low" key="2">
+                Low
+            </option>,
+            <option value="medium" key="3">
+                Medium
+            </option>,
+            <option value="high" key="4">
+                High
+            </option>,
+        ];
     }
 
     return (

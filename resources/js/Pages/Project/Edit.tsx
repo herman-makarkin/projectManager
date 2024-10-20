@@ -90,12 +90,9 @@ const Edit = ({ project }: any) => {
                         id="project_status"
                         name="status"
                         value={data.status}
+                        type="status"
                         onChange={(e) => setData('status', e.target.value)}
-                    >
-                        <option value="">Select Status</option>
-                        <option value="active">Active</option>
-                        <option value="inactive">Inactive</option>
-                    </SelectInput>
+                    ></SelectInput>
                     <InputError message={errors.status} />
                 </div>
                 <div>
