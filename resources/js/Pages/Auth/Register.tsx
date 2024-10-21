@@ -91,6 +91,7 @@ export default function Register() {
                         onChange={(e) => setData('gender', e.target.value)}
                         required
                     >
+                        <option value="">Select Gender</option>
                         <option value="Male">Male</option>
                         <option value="Male">Female</option>
                     </SelectInput>

@@ -57,8 +57,9 @@ export default function Login({
                             isFocused={true}
                             onChange={(e) => setData('email', e.target.value)}
                         />
-
-                        <InputError message={errors.email} className="mt-2" />
+                    </div>
+                    <div className="">
+                        <InputError message={errors.email} className="mt-2" />{' '}
                     </div>
                 </div>
 
@@ -92,19 +93,24 @@ export default function Login({
                     </label>
                 </div>
 
-                <div className="mt-4 flex items-center justify-end">
-                    {canResetPassword && (
-                        <Link
-                            href={route('password.request')}
-                            className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
-                        >
-                            Forgot your password?
-                        </Link>
-                    )}
+                <div className="d-flex justify-content-between align-items-center mt-4">
+                    <Link href={route('register')} className="link-primary">
+                        Sigh up
+                    </Link>
+                    <div>
+                        {canResetPassword && (
+                            <Link
+                                href={route('password.request')}
+                                className="link-secondary"
+                            >
+                                Forgot your password?
+                            </Link>
+                        )}
 
-                    <PrimaryButton className="ms-4" disabled={processing}>
-                        Log in
-                    </PrimaryButton>
+                        <PrimaryButton className="ms-4" disabled={processing}>
+                            Log in
+                        </PrimaryButton>
+                    </div>
                 </div>
             </form>
         </GuestLayout>
