@@ -1,13 +1,26 @@
 import Pagination from '@/Components/Pagination';
 import SelectInput from '@/Components/SelectInput';
 import TextInput from '@/Components/TextInput';
-import { PROJECT_STATUS_CLASS_MAP, PROJECT_STATUS_TEXT_MAP } from '@/constants';
+import {
+    PROJECT_STATUS_CLASS_MAP,
+    PROJECT_STATUS_TEXT_MAP,
+    StatusProps,
+} from '@/constants';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
+import { Project, ProjectData, queryParamsProps } from '@/props';
 import { Head, Link, router } from '@inertiajs/react';
 
-interface IndexProps {}
+interface Index {
+    projects: ProjectData;
+    queryParams: queryParamsProps;
+    success?: string | null;
+}
 
-export default function Index({ projects, queryParams = null, success }: any) {
+export default function Index({
+    projects,
+    queryParams,
+    success = null,
+}: Index) {
     queryParams = queryParams || {};
     const search = (name: string, value: string): void => {
         if (value) {
@@ -19,14 +32,18 @@ export default function Index({ projects, queryParams = null, success }: any) {
         router.get(route('project.index'), queryParams);
     };
 
-    const onKeyPress = (name: string, e: any): void => {
-        if (e.key !== 'Enter') return;
-
-        search(name, e.target.value);
+    const onKeyPress = (
+        name: string,
+        e: React.KeyboardEvent<HTMLInputElement>,
+        key: string,
+    ): void => {
+        const searchKey = 'Enter';
+        if (key !== searchKey) return;
+        search(name, e.currentTarget.value);
     };
 
     const sortChanged = (name: string): void => {
-        if (name === queryParams[name]) {
+        if (name === queryParams.sort_field) {
             if (queryParams.sort_mode === 'asc') {
                 queryParams.sort_mode = 'desc';
             } else {
@@ -39,7 +56,7 @@ export default function Index({ projects, queryParams = null, success }: any) {
         router.get(route('project.index'), queryParams);
     };
 
-    const removeProject = (project: any): void => {
+    const removeProject = (project: Project): void => {
         if (window.confirm('Are you sure you want to remove this project?')) {
             router.delete(route('project.destroy', project.id));
         }
@@ -68,31 +85,28 @@ export default function Index({ projects, queryParams = null, success }: any) {
                 <table className="mt-3 table">
                     <thead>
                         <tr>
-                            <th scope="col" onClick={(e) => sortChanged('id')}>
+                            <th scope="col" onClick={() => sortChanged('id')}>
                                 ID
                             </th>
                             <td scope="col">Image</td>
-                            <td
-                                scope="col"
-                                onClick={(e) => sortChanged('name')}
-                            >
+                            <td scope="col" onClick={() => sortChanged('name')}>
                                 Name
                             </td>
                             <td
                                 scope="col"
-                                onClick={(e) => sortChanged('status')}
+                                onClick={() => sortChanged('status')}
                             >
                                 Status
                             </td>
                             <td
                                 scope="col"
-                                onClick={(e) => sortChanged('created_at')}
+                                onClick={() => sortChanged('created_at')}
                             >
                                 Creation date
                             </td>
                             <td
                                 scope="col"
-                                onClick={(e) => sortChanged('deadline')}
+                                onClick={() => sortChanged('deadline')}
                             >
                                 Deadline
                             </td>
@@ -113,7 +127,9 @@ export default function Index({ projects, queryParams = null, success }: any) {
                                     onBlur={(e) =>
                                         search('name', e.target.value)
                                     }
-                                    onKeyDown={(e) => onKeyPress('name', e)}
+                                    onKeyDown={(e) =>
+                                        onKeyPress('name', e, e.key)
+                                    }
                                 />
                             </td>
                             <td scope="col">
@@ -136,7 +152,7 @@ export default function Index({ projects, queryParams = null, success }: any) {
                         </tr>
                     </thead>
                     <tbody>
-                        {projects.data.map((project: any) => (
+                        {projects.data.map((project: Project) => (
                             <tr key={project.id}>
                                 <th scope="row" className="align-middle">
                                     {project.id}
@@ -161,13 +177,13 @@ export default function Index({ projects, queryParams = null, success }: any) {
                                     <span
                                         className={
                                             PROJECT_STATUS_CLASS_MAP[
-                                                project.status
+                                                project.status as keyof StatusProps
                                             ] + ' rounded-1'
                                         }
                                     >
                                         {
                                             PROJECT_STATUS_TEXT_MAP[
-                                                project.status
+                                                project.status as keyof StatusProps
                                             ]
                                         }
                                     </span>

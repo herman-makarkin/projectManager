@@ -1,13 +1,18 @@
 import Pagination from '@/Components/Pagination';
 import TextInput from '@/Components/TextInput';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
+import { queryParamsProps, UserData, UserProps } from '@/props';
 import { Head, Link, router } from '@inertiajs/react';
 
-interface IndexProps {}
+interface Index {
+    users: UserData;
+    queryParams: queryParamsProps;
+    success?: string | null;
+}
 
-export default function Index({ users, queryParams = null, success }: any) {
+export default function Index({ users, queryParams = null, success }: Index) {
     queryParams = queryParams || {};
-    const search = (name: string, value: string): void => {
+    const search = (name: string, value: string | null): void => {
         if (value) {
             queryParams[name] = value;
         } else {
@@ -17,14 +22,18 @@ export default function Index({ users, queryParams = null, success }: any) {
         router.get(route('user.index'), queryParams);
     };
 
-    const onKeyPress = (name: string, e: any): void => {
-        if (e.key !== 'Enter') return;
-
-        search(name, e.target.value);
+    const onKeyPress = (
+        name: string,
+        e: React.KeyboardEvent<HTMLInputElement>,
+        key: string,
+    ): void => {
+        const searchKey = 'Enter';
+        if (key !== searchKey) return;
+        search(name, e.currentTarget.value);
     };
 
     const sortChanged = (name: string): void => {
-        if (name === queryParams[name]) {
+        if (name === queryParams.sort_field) {
             if (queryParams.sort_mode === 'asc') {
                 queryParams.sort_mode = 'desc';
             } else {
@@ -37,7 +46,7 @@ export default function Index({ users, queryParams = null, success }: any) {
         router.get(route('user.index'), queryParams);
     };
 
-    const removeUser = (user: any): void => {
+    const removeUser = (user: UserProps): void => {
         if (window.confirm('Are you sure you want to remove this user?')) {
             router.delete(route('user.destroy', user.id));
         }
@@ -66,37 +75,34 @@ export default function Index({ users, queryParams = null, success }: any) {
                 <table className="mt-3 table">
                     <thead>
                         <tr>
-                            <th scope="col" onClick={(e) => sortChanged('id')}>
+                            <th scope="col" onClick={() => sortChanged('id')}>
                                 ID
                             </th>
                             {/* <td scope="col">Image</td> */}
-                            <td
-                                scope="col"
-                                onClick={(e) => sortChanged('name')}
-                            >
+                            <td scope="col" onClick={() => sortChanged('name')}>
                                 Name
                             </td>
                             <td
                                 scope="col"
-                                onClick={(e) => sortChanged('email')}
+                                onClick={() => sortChanged('email')}
                             >
                                 Email
                             </td>
                             <td
                                 scope="col"
-                                onClick={(e) => sortChanged('gender')}
+                                onClick={() => sortChanged('gender')}
                             >
                                 Gender
                             </td>
                             <td
                                 scope="col"
-                                onClick={(e) => sortChanged('birthdate')}
+                                onClick={() => sortChanged('birthdate')}
                             >
                                 Birthdate
                             </td>
                             <td
                                 scope="col"
-                                onClick={(e) => sortChanged('created_at')}
+                                onClick={() => sortChanged('created_at')}
                             >
                                 Created at
                             </td>
@@ -116,7 +122,9 @@ export default function Index({ users, queryParams = null, success }: any) {
                                     onBlur={(e) =>
                                         search('name', e.target.value)
                                     }
-                                    onKeyDown={(e) => onKeyPress('name', e)}
+                                    onKeyDown={(e) =>
+                                        onKeyPress('name', e, e.key)
+                                    }
                                 />
                             </td>
                             <td scope="col">
@@ -126,7 +134,9 @@ export default function Index({ users, queryParams = null, success }: any) {
                                     onBlur={(e) =>
                                         search('email', e.target.value)
                                     }
-                                    onKeyDown={(e) => onKeyPress('email', e)}
+                                    onKeyDown={(e) =>
+                                        onKeyPress('email', e, e.key)
+                                    }
                                 />
                             </td>
                             <td scope="col"></td>
@@ -136,7 +146,7 @@ export default function Index({ users, queryParams = null, success }: any) {
                         </tr>
                     </thead>
                     <tbody>
-                        {users.data.map((user: any) => (
+                        {users.data.map((user) => (
                             <tr key={user.id}>
                                 <th scope="row" className="align-middle">
                                     {user.id}

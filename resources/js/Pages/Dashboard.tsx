@@ -1,7 +1,21 @@
-import { TASK_STATUS_CLASS_MAP, TASK_STATUS_TEXT_MAP } from '@/constants';
+import {
+    StatusProps,
+    TASK_STATUS_CLASS_MAP,
+    TASK_STATUS_TEXT_MAP,
+} from '@/constants';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import { Task, TaskData } from '@/props';
 import { Head, Link } from '@inertiajs/react';
 
+interface Index {
+    totalPendingTasks: string;
+    myPendingTasks: string;
+    totalActiveTasks: string;
+    myActiveTasks: string;
+    totalFinishedTasks: string;
+    myFinishedTasks: string;
+    currentTasks: TaskData;
+}
 export default function Dashboard({
     totalPendingTasks,
     myPendingTasks,
@@ -10,7 +24,7 @@ export default function Dashboard({
     totalFinishedTasks,
     myFinishedTasks,
     currentTasks,
-}: any) {
+}: Index) {
     return (
         <AuthenticatedLayout header={<h2 className="fs-3">Dashboard</h2>}>
             <Head title="Dashboard" />
@@ -63,7 +77,7 @@ export default function Dashboard({
                         </tr>
                     </thead>
                     <tbody>
-                        {currentTasks.data.map((task: any) => (
+                        {currentTasks.data.map((task: Task) => (
                             <tr className="align-middle" key={task.id}>
                                 <td>{task.id}</td>
 
@@ -86,11 +100,16 @@ export default function Dashboard({
                                 <td className="align-middle">
                                     <span
                                         className={
-                                            TASK_STATUS_CLASS_MAP[task.status] +
-                                            ' rounded-1'
+                                            TASK_STATUS_CLASS_MAP[
+                                                task.status as keyof StatusProps
+                                            ] + ' rounded-1'
                                         }
                                     >
-                                        {TASK_STATUS_TEXT_MAP[task.status]}
+                                        {
+                                            TASK_STATUS_TEXT_MAP[
+                                                task.status as keyof StatusProps
+                                            ]
+                                        }
                                     </span>
                                 </td>
                                 <td className="align-middle">

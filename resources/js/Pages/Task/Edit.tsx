@@ -4,19 +4,32 @@ import SelectInput from '@/Components/SelectInput';
 import TextAreaInput from '@/Components/TextAreaInput';
 import TextInput from '@/Components/TextInput';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
+import {
+    ProjectData,
+    ProjectProps,
+    TaskProps,
+    UserData,
+    UserProps,
+} from '@/props';
 import { Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 
-const Edit = ({ task, projects, users }: any) => {
-    const { data, setData, post, errors, reset } = useForm({
-        image: '',
-        name: task.name || '',
-        priority: task.priority || '',
-        status: task.status || '',
-        project_id: task.project_id || '',
-        assigned_user_id: task.assigned_user_id || '',
-        description: task.description || '',
-        deadline: task.deadline || '',
+interface Index {
+    task: TaskProps;
+    projects: ProjectData;
+    users: UserData;
+}
+
+const Edit = ({ task, projects, users }: Index) => {
+    const { data, setData, post, errors } = useForm({
+        image: task.image || undefined,
+        name: task.name || undefined,
+        priority: task.priority || undefined,
+        status: task.status || undefined,
+        project_id: task.project_id || undefined,
+        assigned_user_id: task.assigned_user_id || undefined,
+        description: task.description || undefined,
+        deadline: task.deadline || undefined,
         _method: 'PUT',
     });
 
@@ -36,7 +49,10 @@ const Edit = ({ task, projects, users }: any) => {
                         id="task_image_path"
                         type="file"
                         name="image"
-                        onChange={(e) => setData('image', e.target.files[0])}
+                        onChange={(e) => {
+                            if (e.target.files)
+                                return setData('image', e.target.files[0]);
+                        }}
                     />
                     <InputError message={errors.image} />
                 </div>
@@ -110,7 +126,7 @@ const Edit = ({ task, projects, users }: any) => {
                         onChange={(e) => setData('project_id', e.target.value)}
                     >
                         <option value="">Select Project</option>
-                        {projects.data.map((project: any) => (
+                        {projects.data.map((project: ProjectProps) => (
                             <option key={project.id} value={project.id}>
                                 {project.name}
                             </option>
@@ -134,7 +150,7 @@ const Edit = ({ task, projects, users }: any) => {
                         }
                     >
                         <option value="">Select User</option>
-                        {users.data.map((user: any) => (
+                        {users.data.map((user: UserProps) => (
                             <option key={user.id} value={user.id}>
                                 {user.name}
                             </option>

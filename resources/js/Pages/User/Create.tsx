@@ -3,11 +3,12 @@ import InputLabel from '@/Components/InputLabel';
 import SelectInput from '@/Components/SelectInput';
 import TextInput from '@/Components/TextInput';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
+import { UserProps } from '@/props';
 import { Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 
 const Create = () => {
-    const { data, setData, post, errors, reset } = useForm({
+    const { data, setData, post, errors } = useForm<UserProps>({
         // image: '',
         name: '',
         email: '',
@@ -16,7 +17,6 @@ const Create = () => {
         password: '',
         password_confirmation: '',
         // description: '',
-        // deadline: '',
     });
 
     const onSubmit: FormEventHandler = (e) => {

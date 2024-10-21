@@ -4,11 +4,16 @@ import SelectInput from '@/Components/SelectInput';
 import TextAreaInput from '@/Components/TextAreaInput';
 import TextInput from '@/Components/TextInput';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
+import { ProjectProps } from '@/props';
 import { Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 
-const Edit = ({ project }: any) => {
-    const { data, setData, post, errors, reset } = useForm({
+interface Index {
+    project: ProjectProps;
+}
+
+const Edit = ({ project }: Index) => {
+    const { data, setData, post, errors } = useForm({
         image: project.image || '',
         name: project.name || '',
         status: project.status || '',
@@ -44,7 +49,10 @@ const Edit = ({ project }: any) => {
                         id="project_image_path"
                         type="file"
                         name="image"
-                        onChange={(e) => setData('image', e.target.files[0])}
+                        onChange={(e) => {
+                            if (e.target.files)
+                                return setData('image', e.target.files[0]);
+                        }}
                     />
                     <InputError message={errors.image} />
                 </div>

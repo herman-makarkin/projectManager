@@ -1,11 +1,15 @@
 //import { TASK_STATUS_CLASS_MAP, TASK_STATUS_TEXT_MAP } from '@/constants';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
+import { queryParamsProps, TaskData } from '@/props';
 import { Head, Link } from '@inertiajs/react';
 import TasksTable from './TasksTable';
 
-interface IndexProps {}
+interface Index {
+    tasks: TaskData;
+    queryParams: queryParamsProps;
+}
 
-export default function Index({ tasks, queryParams = null }: any) {
+export default function Index({ tasks, queryParams }: Index) {
     return (
         <Authenticated
             //user={auth.user}

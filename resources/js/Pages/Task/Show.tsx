@@ -1,12 +1,20 @@
 import {
+    PriorityProps,
+    StatusProps,
     TASK_PRIORITY_CLASS_MAP,
     TASK_PRIORITY_TEXT_MAP,
     TASK_STATUS_CLASS_MAP,
     TASK_STATUS_TEXT_MAP,
 } from '@/constants';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
+import { Task } from '@/props';
 import { Head, Link } from '@inertiajs/react';
-const Show = ({ task }: any) => {
+
+interface Index {
+    task: Task;
+}
+
+const Show = ({ task }: Index) => {
     return (
         <Authenticated
             header={
@@ -41,10 +49,16 @@ const Show = ({ task }: any) => {
                             <p
                                 className={
                                     'fs-3 ms-3 ' +
-                                    TASK_STATUS_CLASS_MAP[task.status]
+                                    TASK_STATUS_CLASS_MAP[
+                                        task.status as keyof StatusProps
+                                    ]
                                 }
                             >
-                                {TASK_STATUS_TEXT_MAP[task.status]}
+                                {
+                                    TASK_STATUS_TEXT_MAP[
+                                        task.status as keyof StatusProps
+                                    ]
+                                }
                             </p>
                         </div>
 
@@ -63,10 +77,16 @@ const Show = ({ task }: any) => {
                             <p
                                 className={
                                     'fs-3 ms-3 ' +
-                                    TASK_PRIORITY_CLASS_MAP[task.priority]
+                                    TASK_PRIORITY_CLASS_MAP[
+                                        task.priority as keyof PriorityProps
+                                    ]
                                 }
                             >
-                                {TASK_PRIORITY_TEXT_MAP[task.priority]}
+                                {
+                                    TASK_PRIORITY_TEXT_MAP[
+                                        task.priority as keyof PriorityProps
+                                    ]
+                                }
                             </p>
                         </div>
                         <div className="mt-4">

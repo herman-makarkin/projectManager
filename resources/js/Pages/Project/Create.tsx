@@ -7,19 +7,30 @@ import Authenticated from '@/Layouts/AuthenticatedLayout';
 import { Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 
+interface FormProps {
+    image: File | undefined;
+    name: string;
+    status: string;
+    description: string;
+    deadline: string;
+}
+
 const Create = () => {
-    const { data, setData, post, errors, reset } = useForm({
-        image: '',
+    const { data, setData, post, errors } = useForm<FormProps>({
+        image: undefined,
         name: '',
         status: '',
         description: '',
         deadline: '',
     });
 
-    const onSubmit: FormEventHandler = (e: any) => {
+    const onSubmit: FormEventHandler = (
+        e: React.ChangeEvent<HTMLInputElement>,
+    ) => {
         e.preventDefault();
         post(route('project.store'));
     };
+
     return (
         <Authenticated
             header={<h2 className="text-gray fs-3">Create new Project</h2>}
@@ -34,7 +45,10 @@ const Create = () => {
                         id="project_image_path"
                         type="file"
                         name="image"
-                        onChange={(e) => setData('image', e.target.files[0])}
+                        onChange={(e) => {
+                            if (e.target.files)
+                                return setData('image', e.target.files[0]);
+                        }}
                     />
                     <InputError message={errors.image} />
                 </div>

@@ -1,6 +1,12 @@
 import Authenticated from '@/Layouts/AuthenticatedLayout';
+import { UserProps } from '@/props';
 import { Head, Link } from '@inertiajs/react';
-const Show = ({ user }: any) => {
+
+interface Index {
+    user: UserProps;
+}
+
+const Show = ({ user }: Index) => {
     return (
         <Authenticated
             header={

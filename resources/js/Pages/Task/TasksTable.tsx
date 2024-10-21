@@ -1,15 +1,27 @@
 import Pagination from '@/Components/Pagination';
 import SelectInput from '@/Components/SelectInput';
 import TextInput from '@/Components/TextInput';
-import { TASK_STATUS_CLASS_MAP, TASK_STATUS_TEXT_MAP } from '@/constants';
+import {
+    StatusProps,
+    TASK_STATUS_CLASS_MAP,
+    TASK_STATUS_TEXT_MAP,
+} from '@/constants';
+import { queryParamsProps, TaskData, TaskProps } from '@/props';
 import { Link, router } from '@inertiajs/react';
+
+interface Index {
+    tasks: TaskData; //TaskProps[];
+    queryParams: queryParamsProps;
+    projectColumn?: boolean;
+    actions?: boolean;
+}
 
 const TasksTable = ({
     tasks,
     queryParams,
     projectColumn = true,
     actions = true,
-}: any) => {
+}: Index) => {
     queryParams = queryParams || {};
     const search = (name: string, value: string) => {
         if (value) {
@@ -21,14 +33,18 @@ const TasksTable = ({
         router.get(route('task.index'), queryParams);
     };
 
-    const onKeyPress = (name: string, e: any) => {
-        if (e.key !== 'Enter') return;
-
-        search(name, e.target.value);
+    const onKeyPress = (
+        name: string,
+        e: React.KeyboardEvent<HTMLInputElement>,
+        key: string,
+    ): void => {
+        const searchKey = 'Enter';
+        if (key !== searchKey) return;
+        search(name, e.currentTarget.value);
     };
 
     const sortChanged = (name: string) => {
-        if (name === queryParams[name]) {
+        if (name === queryParams.sortfield) {
             if (queryParams.sort_mode === 'asc') {
                 queryParams.sort_mode = 'desc';
             } else {
@@ -41,7 +57,7 @@ const TasksTable = ({
         router.get(route('task.index'), queryParams);
     };
 
-    const removeTask = (task: any): void => {
+    const removeTask = (task: TaskProps): void => {
         if (window.confirm('Are you sure you want to remove this project?')) {
             router.delete(route('task.destroy', task.id));
         }
@@ -53,27 +69,24 @@ const TasksTable = ({
             <table className="table">
                 <thead>
                     <tr>
-                        <th scope="col" onClick={(e) => sortChanged('id')}>
+                        <th scope="col" onClick={() => sortChanged('id')}>
                             ID
                         </th>
                         <td scope="col">Image</td>
                         {projectColumn && <td scope="col">Project name</td>}
-                        <td scope="col" onClick={(e) => sortChanged('name')}>
+                        <td scope="col" onClick={() => sortChanged('name')}>
                             Name
                         </td>
-                        <td scope="col" onClick={(e) => sortChanged('status')}>
+                        <td scope="col" onClick={() => sortChanged('status')}>
                             Status
                         </td>
                         <td
                             scope="col"
-                            onClick={(e) => sortChanged('created_at')}
+                            onClick={() => sortChanged('created_at')}
                         >
                             Creation date
                         </td>
-                        <td
-                            scope="col"
-                            onClick={(e) => sortChanged('deadline')}
-                        >
+                        <td scope="col" onClick={() => sortChanged('deadline')}>
                             Deadline
                         </td>
                         <td scope="col">Creator</td>
@@ -94,7 +107,7 @@ const TasksTable = ({
                                 placeholder="Task name"
                                 defaultValue={queryParams.name}
                                 onBlur={(e) => search('name', e.target.value)}
-                                onKeyDown={(e) => onKeyPress('name', e)}
+                                onKeyDown={(e) => onKeyPress('name', e, e.key)}
                             />
                         </td>
                         <td scope="col">
@@ -117,7 +130,7 @@ const TasksTable = ({
                     </tr>
                 </thead>
                 <tbody>
-                    {tasks.data.map((task: any) => (
+                    {tasks.data.map((task) => (
                         <tr className="align-middle" key={task.id}>
                             <td>{task.id}</td>
                             <td
@@ -147,17 +160,22 @@ const TasksTable = ({
                             <td className="align-middle">
                                 <span
                                     className={
-                                        TASK_STATUS_CLASS_MAP[task.status] +
-                                        ' rounded-1'
+                                        TASK_STATUS_CLASS_MAP[
+                                            task.status as keyof StatusProps
+                                        ] + ' rounded-1'
                                     }
                                 >
-                                    {TASK_STATUS_TEXT_MAP[task.status]}
+                                    {
+                                        TASK_STATUS_TEXT_MAP[
+                                            task.status as keyof StatusProps
+                                        ]
+                                    }
                                 </span>
                             </td>
                             <td className="align-middle">{task.created_at}</td>
                             <td className="align-middle">{task.deadline}</td>
                             <td className="align-middle">
-                                {task.creator.name}
+                                {task.creator ? task.creator.name : ''}
                             </td>
                             {actions && (
                                 <td className="align-middle">

@@ -4,12 +4,18 @@ import SelectInput from '@/Components/SelectInput';
 import TextAreaInput from '@/Components/TextAreaInput';
 import TextInput from '@/Components/TextInput';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
+import { ProjectData, TaskProps, UserData } from '@/props';
 import { Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 
-const Create = ({ projects, users }: any) => {
-    const { data, setData, post, errors, reset } = useForm({
-        image: '',
+interface Index {
+    projects: ProjectData;
+    users: UserData;
+}
+
+const Create = ({ projects, users }: Index) => {
+    const { data, setData, post, errors } = useForm<TaskProps>({
+        image: undefined,
         name: '',
         priority: '',
         status: '',
@@ -34,7 +40,10 @@ const Create = ({ projects, users }: any) => {
                         id="task_image_path"
                         type="file"
                         name="image"
-                        onChange={(e) => setData('image', e.target.files[0])}
+                        onChange={(e) => {
+                            if (e.target.files)
+                                return setData('image', e.target.files[0]);
+                        }}
                     />
                     <InputError message={errors.image} />
                 </div>
@@ -108,7 +117,7 @@ const Create = ({ projects, users }: any) => {
                         onChange={(e) => setData('project_id', e.target.value)}
                     >
                         <option value="">Select Project</option>
-                        {projects.data.map((project: any) => (
+                        {projects.data.map((project) => (
                             <option key={project.id} value={project.id}>
                                 {project.name}
                             </option>
@@ -132,7 +141,7 @@ const Create = ({ projects, users }: any) => {
                         }
                     >
                         <option value="">Select User</option>
-                        {users.data.map((user: any) => (
+                        {users.data.map((user) => (
                             <option key={user.id} value={user.id}>
                                 {user.name}
                             </option>

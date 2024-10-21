@@ -1,8 +1,20 @@
-import { PROJECT_STATUS_CLASS_MAP, PROJECT_STATUS_TEXT_MAP } from '@/constants';
+import {
+    PROJECT_STATUS_CLASS_MAP,
+    PROJECT_STATUS_TEXT_MAP,
+    StatusProps,
+} from '@/constants';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
+import { Project, queryParamsProps, TaskData } from '@/props';
 import { Head, Link } from '@inertiajs/react';
 import TasksTable from '../Task/TasksTable';
-const Show = ({ project, tasks, queryParams }: any) => {
+
+interface Index {
+    project: Project;
+    tasks: TaskData;
+    queryParams: queryParamsProps;
+}
+
+const Show = ({ project, tasks, queryParams }: Index) => {
     return (
         <Authenticated
             header={
@@ -37,10 +49,16 @@ const Show = ({ project, tasks, queryParams }: any) => {
                             <p
                                 className={
                                     'fs-3 ms-3 ' +
-                                    PROJECT_STATUS_CLASS_MAP[project.status]
+                                    PROJECT_STATUS_CLASS_MAP[
+                                        project.status as keyof StatusProps
+                                    ]
                                 }
                             >
-                                {PROJECT_STATUS_TEXT_MAP[project.status]}
+                                {
+                                    PROJECT_STATUS_TEXT_MAP[
+                                        project.status as keyof StatusProps
+                                    ]
+                                }
                             </p>
                         </div>
 

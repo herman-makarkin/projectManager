@@ -1,3 +1,15 @@
+export interface StatusProps {
+    pending: string;
+    active: string;
+    finished: string;
+}
+
+export interface PriorityProps {
+    low: string;
+    medium: string;
+    high: string;
+}
+
 const common = 'text-white p-1 d-inline-block rounded ';
 
 export const PROJECT_STATUS_CLASS_MAP = {

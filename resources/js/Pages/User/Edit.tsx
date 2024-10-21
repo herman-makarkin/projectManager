@@ -3,11 +3,16 @@ import InputLabel from '@/Components/InputLabel';
 import SelectInput from '@/Components/SelectInput';
 import TextInput from '@/Components/TextInput';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
+import { UserProps } from '@/props';
 import { Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 
-const Edit = ({ user }: any) => {
-    const { data, setData, post, errors, reset } = useForm({
+interface Index {
+    user: UserProps;
+}
+
+const Edit = ({ user }: Index) => {
+    const { data, setData, post, errors } = useForm({
         // image: '',
         name: user.name || '',
         email: user.email || '',
