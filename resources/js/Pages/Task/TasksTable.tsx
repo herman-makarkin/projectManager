@@ -1,5 +1,6 @@
 import Pagination from '@/Components/Pagination';
 import SelectInput from '@/Components/SelectInput';
+import TableHeading from '@/Components/TableHeading';
 import TextInput from '@/Components/TextInput';
 import {
     StatusProps,
@@ -8,20 +9,19 @@ import {
 } from '@/constants';
 import { queryParamsProps, TaskData, TaskProps } from '@/props';
 import { Link, router } from '@inertiajs/react';
-
-interface Index {
-    tasks: TaskData; //TaskProps[];
-    queryParams: queryParamsProps;
-    projectColumn?: boolean;
-    actions?: boolean;
-}
+import { Table } from 'react-bootstrap';
 
 const TasksTable = ({
     tasks,
     queryParams,
     projectColumn = true,
     actions = true,
-}: Index) => {
+}: {
+    tasks: TaskData;
+    queryParams: queryParamsProps;
+    projectColumn?: boolean;
+    actions?: boolean;
+}) => {
     queryParams = queryParams || {};
     const search = (name: string, value: string) => {
         if (value) {
@@ -44,7 +44,7 @@ const TasksTable = ({
     };
 
     const sortChanged = (name: string) => {
-        if (name === queryParams.sortfield) {
+        if (name === queryParams.sort_field) {
             if (queryParams.sort_mode === 'asc') {
                 queryParams.sort_mode = 'desc';
             } else {
@@ -65,35 +65,66 @@ const TasksTable = ({
     };
 
     return (
-        <div className="bg-gray pb-2 pt-2">
-            <table className="table">
+        <>
+            <Table className="mb-3" responsive="lg">
                 <thead>
                     <tr>
-                        <th scope="col" onClick={() => sortChanged('id')}>
-                            ID
-                        </th>
-                        <td scope="col">Image</td>
-                        {projectColumn && <td scope="col">Project name</td>}
-                        <td scope="col" onClick={() => sortChanged('name')}>
-                            Name
-                        </td>
-                        <td scope="col" onClick={() => sortChanged('status')}>
-                            Status
-                        </td>
-                        <td
-                            scope="col"
-                            onClick={() => sortChanged('created_at')}
+                        <TableHeading
+                            name="id"
+                            sortChanged={sortChanged}
+                            sort_field={queryParams.sort_field}
+                            sort_mode={queryParams.sort_mode}
+                            sortable={true}
                         >
-                            Creation date
-                        </td>
-                        <td scope="col" onClick={() => sortChanged('deadline')}>
+                            ID
+                        </TableHeading>
+                        <TableHeading sortable={false}>Image</TableHeading>
+                        {projectColumn && (
+                            <TableHeading sortable={false}>
+                                Project Name
+                            </TableHeading>
+                        )}
+                        <TableHeading
+                            name="name"
+                            sortChanged={sortChanged}
+                            sort_field={queryParams.sort_field}
+                            sort_mode={queryParams.sort_mode}
+                            sortable={true}
+                        >
+                            Name
+                        </TableHeading>
+                        <TableHeading
+                            name="status"
+                            sortChanged={sortChanged}
+                            sort_field={queryParams.sort_field}
+                            sort_mode={queryParams.sort_mode}
+                            sortable={true}
+                        >
+                            Status
+                        </TableHeading>
+                        <TableHeading
+                            name="created_at"
+                            sortChanged={sortChanged}
+                            sort_field={queryParams.sort_field}
+                            sort_mode={queryParams.sort_mode}
+                            sortable={true}
+                        >
+                            Creation Date
+                        </TableHeading>
+                        <TableHeading
+                            name="deadline"
+                            sortChanged={sortChanged}
+                            sort_field={queryParams.sort_field}
+                            sort_mode={queryParams.sort_mode}
+                            sortable={true}
+                        >
                             Deadline
-                        </td>
-                        <td scope="col">Creator</td>
+                        </TableHeading>
+                        <TableHeading sortable={false}>Creator</TableHeading>
                         {actions && (
-                            <td scope="col">
-                                <p className="text-end">Actions</p>
-                            </td>
+                            <TableHeading sortable={false}>
+                                Actions
+                            </TableHeading>
                         )}
                     </tr>
                 </thead>
@@ -180,13 +211,13 @@ const TasksTable = ({
                             {actions && (
                                 <td className="align-middle">
                                     <Link
-                                        className="text-success"
+                                        className="text-success me-2"
                                         href={route('task.edit', task.id)}
                                     >
                                         Edit
                                     </Link>
                                     <button
-                                        className="text-danger ms-2"
+                                        className="text-danger mt-lg-0 mt-3"
                                         onClick={() => removeTask(task)}
                                     >
                                         Remove
@@ -196,11 +227,11 @@ const TasksTable = ({
                         </tr>
                     ))}
                 </tbody>
-            </table>
-            <div className="d-flex flex-column justify-content-center align-items-center">
+            </Table>
+            <div className="d-flex flex-column justify-content-center align-items-center mt-4">
                 <Pagination links={tasks.meta.links} />
             </div>
-        </div>
+        </>
     );
 };
 

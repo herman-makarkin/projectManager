@@ -8,12 +8,13 @@ import { ProjectData, TaskProps, UserData } from '@/props';
 import { Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 
-interface Index {
+const Create = ({
+    projects,
+    users,
+}: {
     projects: ProjectData;
     users: UserData;
-}
-
-const Create = ({ projects, users }: Index) => {
+}) => {
     const { data, setData, post, errors } = useForm<TaskProps>({
         image: undefined,
         name: '',

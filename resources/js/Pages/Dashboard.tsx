@@ -6,16 +6,8 @@ import {
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Task, TaskData } from '@/props';
 import { Head, Link } from '@inertiajs/react';
+import { Card, Col, Row, Table } from 'react-bootstrap';
 
-interface Index {
-    totalPendingTasks: string;
-    myPendingTasks: string;
-    totalActiveTasks: string;
-    myActiveTasks: string;
-    totalFinishedTasks: string;
-    myFinishedTasks: string;
-    currentTasks: TaskData;
-}
 export default function Dashboard({
     totalPendingTasks,
     myPendingTasks,
@@ -24,45 +16,59 @@ export default function Dashboard({
     totalFinishedTasks,
     myFinishedTasks,
     currentTasks,
-}: Index) {
+}: {
+    totalPendingTasks: string;
+    myPendingTasks: string;
+    totalActiveTasks: string;
+    myActiveTasks: string;
+    totalFinishedTasks: string;
+    myFinishedTasks: string;
+    currentTasks: TaskData;
+}) {
     return (
         <AuthenticatedLayout header={<h2 className="fs-3">Dashboard</h2>}>
             <Head title="Dashboard" />
-            <div className="row row-cols-3 gx-5">
-                <div className="col">
-                    <div className="card card-body">
-                        <h2 className="cart-title fs-2 text-primary">
-                            Pending Tasks
-                        </h2>
-                        <p className="card-text fs-4">
-                            {myPendingTasks}/{totalPendingTasks}
-                        </p>
-                    </div>
-                </div>
-                <div className="col">
-                    <div className="card card-body">
-                        <h2 className="cart-title fs-2 text-danger">
-                            Active Tasks
-                        </h2>
-                        <p className="card-text fs-4">
-                            {myActiveTasks}/{totalActiveTasks}
-                        </p>
-                    </div>
-                </div>
-                <div className="col">
-                    <div className="card card-body">
-                        <h2 className="cart-title fs-2 text-success">
-                            Finished Tasks
-                        </h2>
-                        <p className="card-text fs-4">
-                            {myFinishedTasks}/{totalFinishedTasks}
-                        </p>
-                    </div>
-                </div>
-            </div>
+            <Row xs={1} md={3} className="g-4">
+                <Col>
+                    <Card>
+                        <Card.Body>
+                            <h2 className="cart-title fs-2 text-primary">
+                                Pending Tasks
+                            </h2>
+                            <p className="card-text fs-4">
+                                {myPendingTasks}/{totalPendingTasks}
+                            </p>
+                        </Card.Body>
+                    </Card>
+                </Col>
+                <Col>
+                    <Card>
+                        <Card.Body>
+                            <h2 className="cart-title fs-2 text-danger">
+                                Active Tasks
+                            </h2>
+                            <p className="card-text fs-4">
+                                {myActiveTasks}/{totalActiveTasks}
+                            </p>
+                        </Card.Body>
+                    </Card>
+                </Col>
+                <Col>
+                    <Card>
+                        <Card.Body>
+                            <h2 className="cart-title fs-2 text-success">
+                                Finished Tasks
+                            </h2>
+                            <p className="card-text fs-4">
+                                {myFinishedTasks}/{totalFinishedTasks}
+                            </p>
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Row>
             <div className="mt-4">
-                <h3 className="fs-3">The Tasks at hand</h3>
-                <table className="mt-3 table">
+                <h3 className="fs-3">Tasks at hand</h3>
+                <Table className="mt-3" responsive="lg">
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
@@ -135,7 +141,7 @@ export default function Dashboard({
                             </tr>
                         ))}
                     </tbody>
-                </table>
+                </Table>
             </div>
         </AuthenticatedLayout>
     );

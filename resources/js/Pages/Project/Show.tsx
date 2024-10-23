@@ -8,13 +8,15 @@ import { Project, queryParamsProps, TaskData } from '@/props';
 import { Head, Link } from '@inertiajs/react';
 import TasksTable from '../Task/TasksTable';
 
-interface Index {
+const Show = ({
+    project,
+    tasks,
+    queryParams,
+}: {
     project: Project;
     tasks: TaskData;
     queryParams: queryParamsProps;
-}
-
-const Show = ({ project, tasks, queryParams }: Index) => {
+}) => {
     return (
         <Authenticated
             header={
@@ -23,6 +25,7 @@ const Show = ({ project, tasks, queryParams }: Index) => {
                     <Link
                         href={route('project.edit', project.id)}
                         className="btn btn-success"
+                        style={{ maxHeight: 40 }}
                     >
                         Edit
                     </Link>
@@ -34,15 +37,15 @@ const Show = ({ project, tasks, queryParams }: Index) => {
                 <div className="" style={{ width: '38%' }}>
                     <img src={project.image_path} alt="" />
                 </div>
-                <div className="row">
-                    <div className="col-6">
+                <div className="row row-cols-1 row-cols-md-2">
+                    <div className="col">
                         <div className="mt-4">
                             <label className="fs-3 fw-bold">Task ID</label>
-                            <p className="fs-3 ms-3">{project.id}</p>
+                            <p className="fs-3">{project.id}</p>
                         </div>
                         <div className="mt-4">
                             <label className="fs-3 fw-bold">Task Name</label>
-                            <p className="fs-3 ms-3">{project.name}</p>
+                            <p className="fs-3">{project.name}</p>
                         </div>
                         <div className="mt-4">
                             <label className="fs-3 fw-bold">Task Status</label>
@@ -66,10 +69,10 @@ const Show = ({ project, tasks, queryParams }: Index) => {
                             <label className="fs-3 fw-bold">
                                 Task Description
                             </label>
-                            <p className="fs-3 ms-3">{project.description}</p>
+                            <p className="fs-3">{project.description}</p>
                         </div>
                     </div>
-                    <div className="col-6">
+                    <div className="col">
                         {/* <div className="mt-4">
                             <label className="fs-3 fw-bold">
                                 Task priority
@@ -85,17 +88,15 @@ const Show = ({ project, tasks, queryParams }: Index) => {
                         </div> */}
                         <div className="mt-4">
                             <label className="fs-3 fw-bold">Deadline</label>
-                            <p className="fs-3 ms-3">{project.deadline}</p>
+                            <p className="fs-3">{project.deadline}</p>
                         </div>
                         <div className="mt-4">
                             <label className="fs-3 fw-bold">Creator</label>
-                            <p className="fs-3 ms-3">{project.creator.name}</p>
+                            <p className="fs-3">{project.creator.name}</p>
                         </div>
                         <div className="mt-4">
                             <label className="fs-3 fw-bold">Updated By</label>
-                            <p className="fs-3 ms-3">
-                                {project.updated_by.name}
-                            </p>
+                            <p className="fs-3">{project.updated_by.name}</p>
                         </div>
                     </div>
                 </div>

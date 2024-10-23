@@ -1,5 +1,6 @@
 import Pagination from '@/Components/Pagination';
 import SelectInput from '@/Components/SelectInput';
+import TableHeading from '@/Components/TableHeading';
 import TextInput from '@/Components/TextInput';
 import {
     PROJECT_STATUS_CLASS_MAP,
@@ -9,18 +10,17 @@ import {
 import Authenticated from '@/Layouts/AuthenticatedLayout';
 import { Project, ProjectData, queryParamsProps } from '@/props';
 import { Head, Link, router } from '@inertiajs/react';
-
-interface Index {
-    projects: ProjectData;
-    queryParams: queryParamsProps;
-    success?: string | null;
-}
+import { Table } from 'react-bootstrap';
 
 export default function Index({
     projects,
     queryParams,
     success = null,
-}: Index) {
+}: {
+    projects: ProjectData;
+    queryParams: queryParamsProps;
+    success?: string | null;
+}) {
     queryParams = queryParams || {};
     const search = (name: string, value: string): void => {
         if (value) {
@@ -82,38 +82,62 @@ export default function Index({
                 {success && (
                     <div className="alert alert-success">{success}</div>
                 )}
-                <table className="mt-3 table">
+                <Table responsive>
                     <thead>
                         <tr>
-                            <th scope="col" onClick={() => sortChanged('id')}>
+                            <TableHeading
+                                name="id"
+                                sortChanged={sortChanged}
+                                sort_field={queryParams.sort_field}
+                                sort_mode={queryParams.sort_mode}
+                                sortable={true}
+                            >
                                 ID
-                            </th>
-                            <td scope="col">Image</td>
-                            <td scope="col" onClick={() => sortChanged('name')}>
+                            </TableHeading>
+                            <TableHeading sortable={false}>Image</TableHeading>
+
+                            <TableHeading
+                                name="name"
+                                sortChanged={sortChanged}
+                                sort_field={queryParams.sort_field}
+                                sort_mode={queryParams.sort_mode}
+                                sortable={true}
+                            >
                                 Name
-                            </td>
-                            <td
-                                scope="col"
-                                onClick={() => sortChanged('status')}
+                            </TableHeading>
+                            <TableHeading
+                                name="status"
+                                sortChanged={sortChanged}
+                                sort_field={queryParams.sort_field}
+                                sort_mode={queryParams.sort_mode}
+                                sortable={true}
                             >
                                 Status
-                            </td>
-                            <td
-                                scope="col"
-                                onClick={() => sortChanged('created_at')}
+                            </TableHeading>
+                            <TableHeading
+                                name="created_at"
+                                sortChanged={sortChanged}
+                                sort_field={queryParams.sort_field}
+                                sort_mode={queryParams.sort_mode}
+                                sortable={true}
                             >
-                                Creation date
-                            </td>
-                            <td
-                                scope="col"
-                                onClick={() => sortChanged('deadline')}
+                                Creation Date
+                            </TableHeading>
+                            <TableHeading
+                                name="deadline"
+                                sortChanged={sortChanged}
+                                sort_field={queryParams.sort_field}
+                                sort_mode={queryParams.sort_mode}
+                                sortable={true}
                             >
                                 Deadline
-                            </td>
-                            <td scope="col">Creator</td>
-                            <td scope="col">
-                                <p className="text-end">Actions</p>
-                            </td>
+                            </TableHeading>
+                            <TableHeading sortable={false}>
+                                Creator
+                            </TableHeading>
+                            <TableHeading sortable={false}>
+                                Actions
+                            </TableHeading>
                         </tr>
                     </thead>
                     <thead>
@@ -199,13 +223,13 @@ export default function Index({
                                 </td>
                                 <td className="align-middle">
                                     <Link
-                                        className="text-success"
+                                        className="text-success ms-2"
                                         href={route('project.edit', project.id)}
                                     >
                                         Edit
                                     </Link>
                                     <button
-                                        className="text-danger ms-2"
+                                        className="text-danger mt-lg-0 ms-2 mt-3"
                                         onClick={() => removeProject(project)}
                                     >
                                         Remove
@@ -214,8 +238,8 @@ export default function Index({
                             </tr>
                         ))}
                     </tbody>
-                </table>
-                <div className="d-flex flex-column justify-content-center align-items-center">
+                </Table>
+                <div className="d-flex flex-column justify-content-center align-items-center mt-3">
                     <Pagination links={projects.meta.links} />
                 </div>
             </div>

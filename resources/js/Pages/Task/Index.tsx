@@ -4,12 +4,13 @@ import { queryParamsProps, TaskData } from '@/props';
 import { Head, Link } from '@inertiajs/react';
 import TasksTable from './TasksTable';
 
-interface Index {
+export default function Index({
+    tasks,
+    queryParams,
+}: {
     tasks: TaskData;
     queryParams: queryParamsProps;
-}
-
-export default function Index({ tasks, queryParams }: Index) {
+}) {
     return (
         <Authenticated
             //user={auth.user}

@@ -1,18 +1,17 @@
 import { LinkProps } from '@/props';
 import { Link } from '@inertiajs/react';
 
-interface Pagination {
-    links: LinkProps[];
-}
-export default function Pagination({ links }: Pagination) {
+export default function Paginatio({ links }: { links: LinkProps[] }) {
+    const linkClass = 'page-item page-link text-nowrap ';
+    const maxPages = 6;
     return (
-        <nav className="pagination">
+        <nav className="pagination" style={{ maxHeight: 40 }}>
             {links.map((link: LinkProps, i: number) => (
                 <Link
                     className={
-                        'page-item page-link ' +
+                        linkClass +
                         (link.active ? 'active' : '') +
-                        (!link.url ? 'text-secondary' : '')
+                        (!link.url ? 'd-none' : '')
                     }
                     disabled={!link.url}
                     preserveScroll

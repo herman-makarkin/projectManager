@@ -6,6 +6,7 @@ import SecondaryButton from '@/Components/SecondaryButton';
 import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
 import { FormEventHandler, useRef, useState } from 'react';
+import { Form } from 'react-bootstrap';
 
 export default function DeleteUserForm({
     className = '',
@@ -52,11 +53,9 @@ export default function DeleteUserForm({
     return (
         <section className={`space-y-6 ${className}`}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                    Delete Account
-                </h2>
+                <h2 className="fs-3">Delete Account</h2>
 
-                <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                <p className="fs-6 mt-2">
                     Once your account is deleted, all of its resources and data
                     will be permanently deleted. Before deleting your account,
                     please download any data or information that you wish to
@@ -69,7 +68,7 @@ export default function DeleteUserForm({
             </DangerButton>
 
             <Modal show={confirmingUserDeletion} onClose={closeModal}>
-                <form onSubmit={deleteUser} className="p-6">
+                <Form onSubmit={deleteUser} className="p-6">
                     <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
                         Are you sure you want to delete your account?
                     </h2>
@@ -117,7 +116,7 @@ export default function DeleteUserForm({
                             Delete Account
                         </DangerButton>
                     </div>
-                </form>
+                </Form>
             </Modal>
         </section>
     );

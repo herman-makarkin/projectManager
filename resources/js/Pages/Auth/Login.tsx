@@ -1,11 +1,11 @@
 import Checkbox from '@/Components/Checkbox';
 import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
+import { Form, InputGroup } from 'react-bootstrap';
 
 export default function Login({
     status,
@@ -38,10 +38,12 @@ export default function Login({
                 </div>
             )}
 
-            <form onSubmit={submit}>
-                <div>
-                    <InputLabel htmlFor="email" value="Email" />
-                    <div className="input-group">
+            <Form onSubmit={submit}>
+                <Form.Group>
+                    <Form.Label htmlFor="email" value="Email">
+                        Email
+                    </Form.Label>
+                    <InputGroup>
                         <span
                             className="input-group-text"
                             id="inputGroupPrepend"
@@ -57,15 +59,16 @@ export default function Login({
                             isFocused={true}
                             onChange={(e) => setData('email', e.target.value)}
                         />
-                    </div>
-                    <div className="">
+                    </InputGroup>
+                    <div>
                         <InputError message={errors.email} className="mt-2" />{' '}
                     </div>
-                </div>
+                </Form.Group>
 
-                <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
-
+                <Form.Group className="mt-4">
+                    <Form.Label htmlFor="password" value="Password">
+                        Password
+                    </Form.Label>
                     <TextInput
                         id="password"
                         type="password"
@@ -76,10 +79,10 @@ export default function Login({
                     />
 
                     <InputError message={errors.password} className="mt-2" />
-                </div>
+                </Form.Group>
 
                 <div className="mt-4 block">
-                    <label className="flex items-center">
+                    <Form.Label className="flex items-center">
                         <Checkbox
                             name="remember"
                             checked={data.remember}
@@ -90,29 +93,34 @@ export default function Login({
                         <span className="ms-2 text-sm text-gray-600 dark:text-gray-400">
                             Remember me
                         </span>
-                    </label>
+                    </Form.Label>
                 </div>
 
-                <div className="d-flex justify-content-between align-items-center mt-4">
-                    <Link href={route('register')} className="link-primary">
-                        Sigh up
-                    </Link>
-                    <div>
+                <Form.Group className="mt-4">
+                    <div className="d-flex justify-content-between align-items-center mb-4">
                         {canResetPassword && (
                             <Link
                                 href={route('password.request')}
                                 className="link-secondary"
                             >
-                                Forgot your password?
+                                Forgot my password
                             </Link>
                         )}
 
-                        <PrimaryButton className="ms-4" disabled={processing}>
+                        <PrimaryButton
+                            className="ms-sm-4 ms-2"
+                            disabled={processing}
+                        >
                             Log in
                         </PrimaryButton>
                     </div>
-                </div>
-            </form>
+                    <div className="d-flex justify-content-center">
+                        <Link href={route('register')} className="link-primary">
+                            Sigh up
+                        </Link>
+                    </div>
+                </Form.Group>
+            </Form>
         </GuestLayout>
     );
 }

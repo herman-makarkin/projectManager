@@ -7,13 +7,13 @@ export default function NavLink({
     ...props
 }: InertiaLinkProps & { active: boolean }) {
     return (
-        <li className="nav-item d-flex flex-column justify-content-center">
-            <Link
-                {...props}
-                className={'nav-link ' + (active ? 'active' : ' ' + className)}
-            >
-                {children}
-            </Link>
-        </li>
+        // <li className="nav-item d-flex flex-column justify-content-center ms-1">
+        <Link
+            {...props}
+            className={'nav-link ' + (active ? 'active' : ' ' + className)}
+        >
+            {children}
+        </Link>
+        // </li>
     );
 }

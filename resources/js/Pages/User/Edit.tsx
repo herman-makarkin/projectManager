@@ -7,11 +7,7 @@ import { UserProps } from '@/props';
 import { Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 
-interface Index {
-    user: UserProps;
-}
-
-const Edit = ({ user }: Index) => {
+const Edit = ({ user }: { user: UserProps }) => {
     const { data, setData, post, errors } = useForm({
         // image: '',
         name: user.name || '',

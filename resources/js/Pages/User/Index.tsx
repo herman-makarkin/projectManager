@@ -1,16 +1,19 @@
 import Pagination from '@/Components/Pagination';
+import TableHeading from '@/Components/TableHeading';
 import TextInput from '@/Components/TextInput';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
 import { queryParamsProps, UserData, UserProps } from '@/props';
 import { Head, Link, router } from '@inertiajs/react';
-
-interface Index {
+import { Table } from 'react-bootstrap';
+export default function Index({
+    users,
+    queryParams = null,
+    success,
+}: {
     users: UserData;
-    queryParams: queryParamsProps;
+    queryParams: queryParamsProps | null;
     success?: string | null;
-}
-
-export default function Index({ users, queryParams = null, success }: Index) {
+}) {
     queryParams = queryParams || {};
     const search = (name: string, value: string | null): void => {
         if (value) {
@@ -72,43 +75,67 @@ export default function Index({ users, queryParams = null, success }: Index) {
                 {success && (
                     <div className="alert alert-success">{success}</div>
                 )}
-                <table className="mt-3 table">
+                <Table className="mt-3" responsive>
                     <thead>
                         <tr>
-                            <th scope="col" onClick={() => sortChanged('id')}>
+                            <TableHeading
+                                name="id"
+                                sortChanged={sortChanged}
+                                sort_field={queryParams.sort_field}
+                                sort_mode={queryParams.sort_mode}
+                                sortable={true}
+                            >
                                 ID
-                            </th>
+                            </TableHeading>
                             {/* <td scope="col">Image</td> */}
-                            <td scope="col" onClick={() => sortChanged('name')}>
+                            <TableHeading
+                                name="name"
+                                sortChanged={sortChanged}
+                                sort_field={queryParams.sort_field}
+                                sort_mode={queryParams.sort_mode}
+                                sortable={true}
+                            >
                                 Name
-                            </td>
-                            <td
-                                scope="col"
-                                onClick={() => sortChanged('email')}
+                            </TableHeading>
+                            <TableHeading
+                                name="email"
+                                sortChanged={sortChanged}
+                                sort_field={queryParams.sort_field}
+                                sort_mode={queryParams.sort_mode}
+                                sortable={true}
                             >
                                 Email
-                            </td>
-                            <td
-                                scope="col"
-                                onClick={() => sortChanged('gender')}
+                            </TableHeading>
+                            <TableHeading
+                                name="gender"
+                                sortChanged={sortChanged}
+                                sort_field={queryParams.sort_field}
+                                sort_mode={queryParams.sort_mode}
+                                sortable={true}
                             >
                                 Gender
-                            </td>
-                            <td
-                                scope="col"
-                                onClick={() => sortChanged('birthdate')}
+                            </TableHeading>
+                            <TableHeading
+                                name="birthdate"
+                                sortChanged={sortChanged}
+                                sort_field={queryParams.sort_field}
+                                sort_mode={queryParams.sort_mode}
+                                sortable={true}
                             >
                                 Birthdate
-                            </td>
-                            <td
-                                scope="col"
-                                onClick={() => sortChanged('created_at')}
+                            </TableHeading>
+                            <TableHeading
+                                name="created_at"
+                                sortChanged={sortChanged}
+                                sort_field={queryParams.sort_field}
+                                sort_mode={queryParams.sort_mode}
+                                sortable={true}
                             >
-                                Created at
-                            </td>
-                            <td scope="col">
-                                <p className="text-end">Actions</p>
-                            </td>
+                                Creation Date
+                            </TableHeading>
+                            <TableHeading sortable={false}>
+                                Actions
+                            </TableHeading>
                         </tr>
                     </thead>
                     <thead>
@@ -174,13 +201,13 @@ export default function Index({ users, queryParams = null, success }: Index) {
                                 </td>
                                 <td className="align-middle">
                                     <Link
-                                        className="text-success"
+                                        className="text-success me-2"
                                         href={route('user.edit', user.id)}
                                     >
                                         Edit
                                     </Link>
                                     <button
-                                        className="text-danger ms-2"
+                                        className="text-danger mt-lg-0 mt-3"
                                         onClick={() => removeUser(user)}
                                     >
                                         Remove
@@ -189,8 +216,8 @@ export default function Index({ users, queryParams = null, success }: Index) {
                             </tr>
                         ))}
                     </tbody>
-                </table>
-                <div className="d-flex flex-column justify-content-center align-items-center">
+                </Table>
+                <div className="d-flex flex-column justify-content-center align-items-center mt-4">
                     <Pagination links={users.meta.links} />
                 </div>
             </div>

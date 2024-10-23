@@ -14,13 +14,15 @@ import {
 import { Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 
-interface Index {
+const Edit = ({
+    task,
+    projects,
+    users,
+}: {
     task: TaskProps;
     projects: ProjectData;
     users: UserData;
-}
-
-const Edit = ({ task, projects, users }: Index) => {
+}) => {
     const { data, setData, post, errors } = useForm({
         image: task.image || undefined,
         name: task.name || undefined,
@@ -39,7 +41,11 @@ const Edit = ({ task, projects, users }: Index) => {
     };
     return (
         <Authenticated
-            header={<h2 className="text-gray fs-3">Edit "{task.name}"</h2>}
+            header={
+                <h2 className="text-gray fs-3" style={{ maxHeight: 40 }}>
+                    Edit"{task.name}"
+                </h2>
+            }
         >
             <form onSubmit={onSubmit}>
                 <div style={{ maxWidth: 500 }}>

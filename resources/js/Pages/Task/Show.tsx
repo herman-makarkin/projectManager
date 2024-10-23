@@ -10,11 +10,7 @@ import Authenticated from '@/Layouts/AuthenticatedLayout';
 import { Task } from '@/props';
 import { Head, Link } from '@inertiajs/react';
 
-interface Index {
-    task: Task;
-}
-
-const Show = ({ task }: Index) => {
+const Show = ({ task }: { task: Task }) => {
     return (
         <Authenticated
             header={
@@ -22,7 +18,8 @@ const Show = ({ task }: Index) => {
                     <h2 className="text-gray fs-3">Task {task.name}</h2>
                     <Link
                         href={route('task.edit', task.id)}
-                        className="btn btn-success"
+                        className="btn btn-success ms-3 align-middle"
+                        style={{ maxHeight: 40 }}
                     >
                         Edit
                     </Link>
@@ -34,21 +31,23 @@ const Show = ({ task }: Index) => {
                 <div>
                     <img src={task.image_path} alt="" />
                 </div>
-                <div className="row">
-                    <div className="col-6">
+                <div className="row row-cols-1 row-cols-md-2">
+                    <div className="col">
                         <div className="mt-4">
                             <label className="fs-3 fw-bold">Task ID</label>
-                            <p className="fs-3 ms-3">{task.id}</p>
+                            <p className="fs-3">{task.id}</p>
                         </div>
                         <div className="mt-4">
                             <label className="fs-3 fw-bold">Task Name</label>
-                            <p className="fs-3 ms-3">{task.name}</p>
+                            <p className="fs-3">{task.name}</p>
                         </div>
                         <div className="mt-4">
-                            <label className="fs-3 fw-bold">Task Status</label>
+                            <label className="fs-3 fw-bold me-3">
+                                Task Status
+                            </label>
                             <p
                                 className={
-                                    'fs-3 ms-3 ' +
+                                    'fs-3 ' +
                                     TASK_STATUS_CLASS_MAP[
                                         task.status as keyof StatusProps
                                     ]
@@ -66,17 +65,17 @@ const Show = ({ task }: Index) => {
                             <label className="fs-3 fw-bold">
                                 Task Description
                             </label>
-                            <p className="fs-3 ms-3">{task.description}</p>
+                            <p className="fs-3">{task.description}</p>
                         </div>
                     </div>
-                    <div className="col-6">
+                    <div className="col">
                         <div className="mt-4">
-                            <label className="fs-3 fw-bold">
+                            <label className="fs-3 fw-bold me-3">
                                 Task priority
                             </label>
                             <p
                                 className={
-                                    'fs-3 ms-3 ' +
+                                    'fs-3 ' +
                                     TASK_PRIORITY_CLASS_MAP[
                                         task.priority as keyof PriorityProps
                                     ]
@@ -91,15 +90,15 @@ const Show = ({ task }: Index) => {
                         </div>
                         <div className="mt-4">
                             <label className="fs-3 fw-bold">Deadline</label>
-                            <p className="fs-3 ms-3">{task.deadline}</p>
+                            <p className="fs-3">{task.deadline}</p>
                         </div>
                         <div className="mt-4">
                             <label className="fs-3 fw-bold">Creator</label>
-                            <p className="fs-3 ms-3">{task.creator.name}</p>
+                            <p className="fs-3">{task.creator.name}</p>
                         </div>
                         <div className="mt-4">
                             <label className="fs-3 fw-bold">Updated By</label>
-                            <p className="fs-3 ms-3">{task.updated_by.name}</p>
+                            <p className="fs-3">{task.updated_by.name}</p>
                         </div>
                     </div>
                 </div>
