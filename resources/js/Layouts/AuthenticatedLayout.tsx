@@ -5,8 +5,9 @@ import { PropsWithChildren, ReactNode } from 'react';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 export default function Authenticated({
     header,
+    padding = true,
     children,
-}: PropsWithChildren<{ header?: ReactNode }>) {
+}: PropsWithChildren<{ header?: ReactNode; padding?: boolean }>) {
     const user = usePage().props.auth.user;
 
     return (
@@ -92,7 +93,9 @@ export default function Authenticated({
                 </header>
             )}
 
-            <Container className="mt-3 py-3 shadow">{children}</Container>
+            <Container className={'mt-3 shadow ' + padding ? 'p-0' : ''}>
+                {children}
+            </Container>
         </>
     );
 }
