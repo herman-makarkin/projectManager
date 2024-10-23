@@ -13,9 +13,17 @@ const TableHeading = ({
     sort_field?: string;
     sort_mode?: string;
     name?: string;
+    wrap?: boolean;
     sortable: boolean;
     sortChanged?: sortChanged;
 }>) => {
+    let arrowStyle: string;
+    if (sort_field === name) {
+        arrowStyle = '';
+    } else {
+        arrowStyle = 'd-none';
+    }
+
     return (
         <th
             scope="col"
@@ -23,11 +31,11 @@ const TableHeading = ({
             onClick={() => sortChanged(name)}
             className={sortable ? '' : 'fw-normal'}
         >
-            <div className={'d-flex align-items-center'}>
+            <div className={'d-flex align-items-center text-nowrap'}>
                 {children}
                 {sortable && (
                     <Arrow
-                        className="ms-2"
+                        className={'ms-2 ' + arrowStyle}
                         isActive={sort_field === name && sort_mode === 'desc'}
                     />
                 )}

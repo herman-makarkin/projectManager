@@ -23,7 +23,10 @@ const TasksTable = ({
     projectColumn?: boolean;
     actions?: boolean;
 }) => {
-    queryParams = queryParams || {};
+    if (!queryParams) {
+        queryParams = {};
+        queryParams.sort_field = 'created_at';
+    }
     const search = (name: string, value: string) => {
         if (value) {
             queryParams[name] = value;
