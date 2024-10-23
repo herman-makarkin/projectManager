@@ -42,7 +42,7 @@ const Create = () => {
                     />
                     <InputError message={errors.image} />
                 </div> */}
-                <div>
+                <Form.Group className="mt-2">
                     <InputLabel htmlFor="user_name" value="User Name" />
                     <TextInput
                         id="user_name"
@@ -53,8 +53,8 @@ const Create = () => {
                         onChange={(e) => setData('name', e.target.value)}
                     />
                     <InputError message={errors.name} />
-                </div>
-                <div>
+                </Form.Group>
+                <Form.Group className="mt-4">
                     <InputLabel htmlFor="user_email" value="User email" />
                     <TextInput
                         id="user_email"
@@ -64,8 +64,8 @@ const Create = () => {
                         onChange={(e) => setData('email', e.target.value)}
                     />
                     <InputError message={errors.name} />
-                </div>
-                <div>
+                </Form.Group>
+                <Form.Group className="mt-4">
                     <InputLabel htmlFor="user_birthdate" value="Birthdate" />
                     <TextInput
                         id="user_birthdate"
@@ -75,7 +75,7 @@ const Create = () => {
                         onChange={(e) => setData('birthdate', e.target.value)}
                     />
                     <InputError message={errors.birthdate} />
-                </div>
+                </Form.Group>
                 {/* <div>
                     <InputLabel
                         htmlFor='user_description'
@@ -89,7 +89,7 @@ const Create = () => {
                     />
                     <InputError message={errors.description} />
                 </div> */}
-                <div>
+                <Form.Group className="mt-4">
                     <InputLabel htmlFor="user_gender" value="Gender" />
 
                     <SelectInput
@@ -100,8 +100,8 @@ const Create = () => {
                         onChange={(e) => setData('gender', e.target.value)}
                     ></SelectInput>
                     <InputError message={errors.gender} />
-                </div>
-                <div className="mt-4">
+                </Form.Group>
+                <Form.Group className="mt-4">
                     <InputLabel htmlFor="password" value="Password" />
 
                     <TextInput
@@ -114,8 +114,8 @@ const Create = () => {
                     />
 
                     <InputError message={errors.password} className="mt-2" />
-                </div>
-                <div className="mt-4">
+                </Form.Group>
+                <Form.Group className="mb-4 mt-4">
                     <InputLabel
                         htmlFor="password_confirmation"
                         value="Password Confirmation"
@@ -133,9 +133,12 @@ const Create = () => {
                     />
 
                     <InputError message={errors.password} className="mt-2" />
-                </div>
-                <div>
-                    <Link href={route('user.index')} className="btn btn-danger">
+                </Form.Group>
+                <Form.Group>
+                    <Link
+                        href={route('user.index')}
+                        className="btn btn-danger me-3"
+                    >
                         Cancel
                     </Link>
                     <input
@@ -143,7 +146,7 @@ const Create = () => {
                         className="btn btn-success"
                         value="Submit"
                     />
-                </div>
+                </Form.Group>
             </Form>
         </Authenticated>
     );
