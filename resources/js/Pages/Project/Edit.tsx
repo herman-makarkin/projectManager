@@ -31,7 +31,7 @@ const Edit = ({ project }: { project: ProjectProps }) => {
                 </h2>
             }
         >
-            <Form onSubmit={onSubmit}>
+            <Form onSubmit={onSubmit} className="rounded p-4 shadow">
                 {project.image_path && (
                     <div style={{ maxWidth: 500 }}>
                         <img src={project.image_path} alt="" />

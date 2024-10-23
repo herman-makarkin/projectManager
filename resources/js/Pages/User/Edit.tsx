@@ -29,7 +29,7 @@ const Edit = ({ user }: { user: UserProps }) => {
         <Authenticated
             header={<h2 className="text-gray fs-3">Edit user '{user.name}'</h2>}
         >
-            <Form onSubmit={onSubmit}>
+            <Form onSubmit={onSubmit} className="rounded p-4 shadow">
                 {/* <div>
                     <InputLabel
                         htmlFor='user_image_path'

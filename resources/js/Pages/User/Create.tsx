@@ -28,7 +28,7 @@ const Create = () => {
         <Authenticated
             header={<h2 className="text-gray fs-3">Create new User</h2>}
         >
-            <Form onSubmit={onSubmit}>
+            <Form onSubmit={onSubmit} className="rounded p-4 shadow">
                 {/* <div>
                     <InputLabel
                         htmlFor='user_image_path'

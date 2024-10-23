@@ -36,7 +36,7 @@ const Create = () => {
         <Authenticated
             header={<h2 className="text-gray fs-3">Create new Project</h2>}
         >
-            <Form onSubmit={onSubmit}>
+            <Form onSubmit={onSubmit} className="rounded p-4 shadow">
                 <Form.Group>
                     <InputLabel
                         htmlFor="project_image_path"

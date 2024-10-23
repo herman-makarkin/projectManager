@@ -48,7 +48,7 @@ const Edit = ({
                 </h2>
             }
         >
-            <Form onSubmit={onSubmit}>
+            <Form onSubmit={onSubmit} className="rounded p-4 shadow">
                 <Form.Group style={{ maxWidth: 500 }}>
                     {task.image_path && <img src={task.image_path} />}
                     <InputLabel htmlFor="task_image_path" value="Task Image" />

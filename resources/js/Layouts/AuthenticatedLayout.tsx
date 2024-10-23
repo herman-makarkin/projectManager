@@ -88,12 +88,12 @@ export default function Authenticated({
             </Navbar>
 
             {header && (
-                <header className="bg-white pt-5 shadow">
+                <header className="mb-4 bg-white pt-5 shadow">
                     <div className="w-100 container mt-5 pb-4">{header}</div>
                 </header>
             )}
 
-            <Container className={'mt-3 shadow ' + padding ? 'p-0' : ''}>
+            <Container className={'mt-3 py-3 shadow ' + padding ? 'p-0' : ''}>
                 {children}
             </Container>
         </>

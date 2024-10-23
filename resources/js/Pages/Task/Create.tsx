@@ -35,7 +35,7 @@ const Create = ({
         <Authenticated
             header={<h2 className="text-gray fs-3">Create new Task</h2>}
         >
-            <Form onSubmit={onSubmit}>
+            <Form onSubmit={onSubmit} className="rounded p-4 shadow">
                 <Form.Group>
                     <InputLabel htmlFor="task_image_path" value="Task Image" />
                     <TextInput
