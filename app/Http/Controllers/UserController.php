@@ -33,7 +33,7 @@ class UserController extends Controller
             $query->where('email', 'like', '%' . request('email') . '%');
         }
 
-        $users = $query->orderBy($sortField, $sortMode)->paginate(10);
+        $users = $query->orderBy($sortField, $sortMode)->paginate(10)->onEachSide(1);
         return inertia("User/Index", [
             "users" => UserCrudResource::collection($users),
             'queryParams' => request()->query() ?: null,
@@ -107,7 +107,7 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         $data = $request->validated();
-        // $data['email_verified_at'] = time(); 
+        // $data['email_verified_at'] = time();
         $password = $data['password'] ?? null;
         if ($password) {
             $data['password'] = bcrypt($password);

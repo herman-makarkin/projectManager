@@ -1,15 +1,16 @@
-import Pagination from '@/Components/Pagination';
-import SelectInput from '@/Components/SelectInput';
-import TableHeading from '@/Components/TableHeading';
-import TextInput from '@/Components/TextInput';
+import Pagination from "@/Components/Pagination";
+import SelectInput from "@/Components/SelectInput";
+import TableHeading from "@/Components/TableHeading";
+import TextInput from "@/Components/TextInput";
+
 import {
     StatusProps,
     TASK_STATUS_CLASS_MAP,
     TASK_STATUS_TEXT_MAP,
-} from '@/constants';
-import { queryParamsProps, TaskData, TaskProps } from '@/props';
-import { Link, router } from '@inertiajs/react';
-import { Table } from 'react-bootstrap';
+} from "@/constants";
+import { queryParamsProps, TaskData, TaskProps } from "@/props";
+import { Link, router } from "@inertiajs/react";
+import { Table } from "react-bootstrap";
 
 const TasksTable = ({
     tasks,
@@ -30,7 +31,7 @@ const TasksTable = ({
             delete queryParams[name];
         }
 
-        router.get(route('task.index'), queryParams);
+        router.get(route("task.index"), queryParams);
     };
 
     const onKeyPress = (
@@ -38,28 +39,28 @@ const TasksTable = ({
         e: React.KeyboardEvent<HTMLInputElement>,
         key: string,
     ): void => {
-        const searchKey = 'Enter';
+        const searchKey = "Enter";
         if (key !== searchKey) return;
         search(name, e.currentTarget.value);
     };
 
     const sortChanged = (name: string) => {
         if (name === queryParams.sort_field) {
-            if (queryParams.sort_mode === 'asc') {
-                queryParams.sort_mode = 'desc';
+            if (queryParams.sort_mode === "asc") {
+                queryParams.sort_mode = "desc";
             } else {
-                queryParams.sort_mode = 'asc';
+                queryParams.sort_mode = "asc";
             }
         } else {
             queryParams.sort_field = name;
-            queryParams.sort_mode = 'asc';
+            queryParams.sort_mode = "asc";
         }
-        router.get(route('task.index'), queryParams);
+        router.get(route("task.index"), queryParams);
     };
 
     const removeTask = (task: TaskProps): void => {
-        if (window.confirm('Are you sure you want to remove this project?')) {
-            router.delete(route('task.destroy', task.id));
+        if (window.confirm("Are you sure you want to remove this project?")) {
+            router.delete(route("task.destroy", task.id));
         }
         return;
     };
@@ -137,16 +138,15 @@ const TasksTable = ({
                             <TextInput
                                 placeholder="Task name"
                                 defaultValue={queryParams.name}
-                                onBlur={(e) => search('name', e.target.value)}
-                                onKeyDown={(e) => onKeyPress('name', e, e.key)}
+                                onBlur={(e) => search("name", e.target.value)}
+                                onKeyDown={(e) => onKeyPress("name", e, e.key)}
                             />
                         </td>
                         <td scope="col">
                             <SelectInput
                                 defaultValue={queryParams.status}
                                 onChange={(e) =>
-                                    search('status', e.target.value)
-                                }
+                                    search("status", e.target.value)}
                             >
                                 <option value="">Select Status</option>
                                 <option value="pending">Pending</option>
@@ -175,7 +175,7 @@ const TasksTable = ({
                                 <td scope="col">
                                     <Link
                                         href={route(
-                                            'project.show',
+                                            "project.show",
                                             task.project.id,
                                         )}
                                     >
@@ -184,35 +184,31 @@ const TasksTable = ({
                                 </td>
                             )}
                             <td className="align-middle">
-                                <Link href={route('task.show', task.id)}>
+                                <Link href={route("task.show", task.id)}>
                                     {task.name}
                                 </Link>
                             </td>
                             <td className="align-middle">
                                 <span
-                                    className={
-                                        TASK_STATUS_CLASS_MAP[
-                                            task.status as keyof StatusProps
-                                        ] + ' rounded-1'
-                                    }
+                                    className={TASK_STATUS_CLASS_MAP[
+                                        task.status as keyof StatusProps
+                                    ] + " rounded-1"}
                                 >
-                                    {
-                                        TASK_STATUS_TEXT_MAP[
-                                            task.status as keyof StatusProps
-                                        ]
-                                    }
+                                    {TASK_STATUS_TEXT_MAP[
+                                        task.status as keyof StatusProps
+                                    ]}
                                 </span>
                             </td>
                             <td className="align-middle">{task.created_at}</td>
                             <td className="align-middle">{task.deadline}</td>
                             <td className="align-middle">
-                                {task.creator ? task.creator.name : ''}
+                                {task.creator ? task.creator.name : ""}
                             </td>
                             {actions && (
                                 <td className="align-middle">
                                     <Link
                                         className="text-success me-2"
-                                        href={route('task.edit', task.id)}
+                                        href={route("task.edit", task.id)}
                                     >
                                         Edit
                                     </Link>
