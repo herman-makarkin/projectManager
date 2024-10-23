@@ -43,7 +43,7 @@ const Edit = ({ user }: { user: UserProps }) => {
                     />
                     <InputError message={errors.image} />
                 </div> */}
-                <div>
+                <Form.Group>
                     <InputLabel htmlFor="user_name" value="User Name" />
                     <TextInput
                         id="user_name"
@@ -54,8 +54,8 @@ const Edit = ({ user }: { user: UserProps }) => {
                         onChange={(e) => setData('name', e.target.value)}
                     />
                     <InputError message={errors.name} />
-                </div>
-                <div className="mt-3">
+                </Form.Group>
+                <Form.Group className="mt-3">
                     <InputLabel htmlFor="user_email" value="User email" />
                     <TextInput
                         id="user_email"
@@ -65,8 +65,8 @@ const Edit = ({ user }: { user: UserProps }) => {
                         onChange={(e) => setData('email', e.target.value)}
                     />
                     <InputError message={errors.name} />
-                </div>
-                <div className="mt-3">
+                </Form.Group>
+                <Form.Group className="mt-3">
                     <InputLabel htmlFor="user_birthdate" value="Birthdate" />
                     <TextInput
                         id="user_birthdate"
@@ -76,7 +76,7 @@ const Edit = ({ user }: { user: UserProps }) => {
                         onChange={(e) => setData('birthdate', e.target.value)}
                     />
                     <InputError message={errors.birthdate} />
-                </div>
+                </Form.Group>
                 {/* <div>
                     <InputLabel
                         htmlFor='user_description'
@@ -116,7 +116,7 @@ const Edit = ({ user }: { user: UserProps }) => {
 
                     <InputError message={errors.password} className="mt-2" />
                 </div>
-                <div className="mt-3">
+                <Form.Group className="mt-3">
                     <InputLabel
                         htmlFor="password_confirmation"
                         value="Password Confirmation"
@@ -134,17 +134,20 @@ const Edit = ({ user }: { user: UserProps }) => {
                     />
 
                     <InputError message={errors.password} className="mt-2" />
-                </div>
-                <div className="d-flex mt-4 flex-row-reverse">
+                </Form.Group>
+                <Form.Group className="d-flex mt-4 flex-row-reverse">
                     <input
                         type="submit"
                         className="btn btn-success ms-3"
                         value="Submit"
                     />
-                    <Link href={route('user.index')} className="btn btn-danger">
+                    <Link
+                        href={route('project.index')}
+                        className="btn btn-danger"
+                    >
                         Cancel
                     </Link>
-                </div>
+                </Form.Group>
             </Form>
         </Authenticated>
     );

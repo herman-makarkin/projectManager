@@ -134,18 +134,18 @@ const Create = () => {
 
                     <InputError message={errors.password} className="mt-2" />
                 </Form.Group>
-                <Form.Group>
+                <Form.Group className="d-flex mt-4 flex-row-reverse">
+                    <input
+                        type="submit"
+                        className="btn btn-success ms-3"
+                        value="Submit"
+                    />
                     <Link
-                        href={route('user.index')}
-                        className="btn btn-danger me-3"
+                        href={route('project.index')}
+                        className="btn btn-danger"
                     >
                         Cancel
                     </Link>
-                    <input
-                        type="submit"
-                        className="btn btn-success"
-                        value="Submit"
-                    />
                 </Form.Group>
             </Form>
         </Authenticated>

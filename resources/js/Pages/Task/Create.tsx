@@ -49,7 +49,7 @@ const Create = ({
                     />
                     <InputError message={errors.image} />
                 </Form.Group>
-                <Form.Group>
+                <Form.Group className="mt-3">
                     <InputLabel htmlFor="task_name" value="Task Name" />
                     <TextInput
                         id="task_name"
@@ -61,7 +61,7 @@ const Create = ({
                     />
                     <InputError message={errors.name} />
                 </Form.Group>
-                <Form.Group>
+                <Form.Group className="mt-3">
                     <InputLabel htmlFor="task_deadline" value="Deadline" />
                     <TextInput
                         id="task_deadline"
@@ -72,7 +72,7 @@ const Create = ({
                     />
                     <InputError message={errors.name} />
                 </Form.Group>
-                <Form.Group>
+                <Form.Group className="mt-3">
                     <InputLabel
                         htmlFor="task_description"
                         value="Description"
@@ -85,7 +85,7 @@ const Create = ({
                     />
                     <InputError message={errors.description} />
                 </Form.Group>
-                <Form.Group>
+                <Form.Group className="mt-3">
                     <InputLabel htmlFor="task_priority" value="Priority" />
 
                     <SelectInput
@@ -97,7 +97,7 @@ const Create = ({
                     ></SelectInput>
                     <InputError message={errors.priority} />
                 </Form.Group>
-                <Form.Group>
+                <Form.Group className="mt-3">
                     <InputLabel htmlFor="task_status" value="status" />
 
                     <SelectInput
@@ -109,7 +109,7 @@ const Create = ({
                     ></SelectInput>
                     <InputError message={errors.status} />
                 </Form.Group>
-                <Form.Group>
+                <Form.Group className="mt-3">
                     <InputLabel htmlFor="task_project_id" value="Project id" />
 
                     <SelectInput
@@ -128,7 +128,7 @@ const Create = ({
 
                     <InputError message={errors.project_id} />
                 </Form.Group>
-                <Form.Group>
+                <Form.Group className="mt-3">
                     <InputLabel
                         htmlFor="task_assigned_user_id"
                         value="assigned user id"
@@ -152,15 +152,18 @@ const Create = ({
 
                     <InputError message={errors.assigned_user_id} />
                 </Form.Group>
-                <Form.Group>
-                    <Link href={route('task.index')} className="btn btn-danger">
-                        Cancel
-                    </Link>
+                <Form.Group className="d-flex mt-4 flex-row-reverse">
                     <input
                         type="submit"
-                        className="btn btn-success"
+                        className="btn btn-success ms-3"
                         value="Submit"
                     />
+                    <Link
+                        href={route('project.index')}
+                        className="btn btn-danger"
+                    >
+                        Cancel
+                    </Link>
                 </Form.Group>
             </Form>
         </Authenticated>

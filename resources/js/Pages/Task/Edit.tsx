@@ -172,7 +172,10 @@ const Edit = ({
                         className="btn btn-success ms-3"
                         value="Submit"
                     />
-                    <Link href={route('task.index')} className="btn btn-danger">
+                    <Link
+                        href={route('project.index')}
+                        className="btn btn-danger"
+                    >
                         Cancel
                     </Link>
                 </Form.Group>
