@@ -67,6 +67,7 @@ export default function Authenticated({
                             title={user.name}
                             id="basic-nav-dropdown"
                             role="button"
+                            className="mt-md-0 mt-2"
                         >
                             <NavDropdown.Item href={route('profile.edit')}>
                                 Profile
