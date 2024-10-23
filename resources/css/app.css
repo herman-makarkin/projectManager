@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@media screen and ( max-width: 600px ){
+@media screen and (max-width: 600px) {
     a.page-item {
         font-size: 11px;
     }

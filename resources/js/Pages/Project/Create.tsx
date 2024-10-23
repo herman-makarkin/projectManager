@@ -6,6 +6,7 @@ import TextInput from '@/Components/TextInput';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
 import { Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
+import { Form } from 'react-bootstrap';
 
 interface FormProps {
     image: File | undefined;
@@ -35,8 +36,8 @@ const Create = () => {
         <Authenticated
             header={<h2 className="text-gray fs-3">Create new Project</h2>}
         >
-            <form onSubmit={onSubmit}>
-                <div>
+            <Form onSubmit={onSubmit}>
+                <Form.Group>
                     <InputLabel
                         htmlFor="project_image_path"
                         value="Project Image"
@@ -51,8 +52,8 @@ const Create = () => {
                         }}
                     />
                     <InputError message={errors.image} />
-                </div>
-                <div>
+                </Form.Group>
+                <Form.Group className="mt-3">
                     <InputLabel htmlFor="project_name" value="Project Name" />
                     <TextInput
                         id="project_name"
@@ -63,8 +64,8 @@ const Create = () => {
                         onChange={(e) => setData('name', e.target.value)}
                     />
                     <InputError message={errors.name} />
-                </div>
-                <div>
+                </Form.Group>
+                <Form.Group className="mt-3">
                     <InputLabel htmlFor="project_deadline" value="Deadline" />
                     <TextInput
                         id="project_deadline"
@@ -74,8 +75,8 @@ const Create = () => {
                         onChange={(e) => setData('deadline', e.target.value)}
                     />
                     <InputError message={errors.name} />
-                </div>
-                <div>
+                </Form.Group>
+                <Form.Group className="mt-3">
                     <InputLabel
                         htmlFor="project_description"
                         value="Description"
@@ -87,8 +88,8 @@ const Create = () => {
                         onChange={(e) => setData('description', e.target.value)}
                     />
                     <InputError message={errors.description} />
-                </div>
-                <div>
+                </Form.Group>
+                <Form.Group className="mt-3">
                     <InputLabel htmlFor="project_status" value="Status" />
 
                     <SelectInput
@@ -99,8 +100,8 @@ const Create = () => {
                         onChange={(e) => setData('status', e.target.value)}
                     ></SelectInput>
                     <InputError message={errors.status} />
-                </div>
-                <div>
+                </Form.Group>
+                <Form.Group className="mt-3">
                     <Link
                         href={route('project.index')}
                         className="btn btn-danger"
@@ -112,8 +113,8 @@ const Create = () => {
                         className="btn btn-success"
                         value="Submit"
                     />
-                </div>
-            </form>
+                </Form.Group>
+            </Form>
         </Authenticated>
     );
 };

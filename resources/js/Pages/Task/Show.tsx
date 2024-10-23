@@ -26,8 +26,8 @@ const Show = ({ task }: { task: Task }) => {
                 </div>
             }
         >
-            <Head title={`Task "${task.name}"`} />
-            <div className="bg-gray">
+            <Head title={`Task '${task.name}'`} />
+            <div>
                 <div>
                     <img src={task.image_path} alt="" />
                 </div>

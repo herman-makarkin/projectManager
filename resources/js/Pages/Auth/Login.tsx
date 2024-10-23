@@ -1,4 +1,3 @@
-import Checkbox from '@/Components/Checkbox';
 import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
@@ -44,12 +43,12 @@ export default function Login({
                         Email
                     </Form.Label>
                     <InputGroup>
-                        <span
+                        <InputGroup.Text
                             className="input-group-text"
                             id="inputGroupPrepend"
                         >
                             @
-                        </span>
+                        </InputGroup.Text>
                         <TextInput
                             id="email"
                             type="email"
@@ -81,20 +80,14 @@ export default function Login({
                     <InputError message={errors.password} className="mt-2" />
                 </Form.Group>
 
-                <div className="mt-4 block">
-                    <Form.Label className="flex items-center">
-                        <Checkbox
-                            name="remember"
-                            checked={data.remember}
-                            onChange={(e) =>
-                                setData('remember', e.target.checked)
-                            }
-                        />
-                        <span className="ms-2 text-sm text-gray-600 dark:text-gray-400">
-                            Remember me
-                        </span>
-                    </Form.Label>
-                </div>
+                <Form.Group className="mt-4 block">
+                    <Form.Check // prettier-ignore
+                        type="checkbox"
+                        id={`default-checkbox`}
+                        label={`Remember me`}
+                        onChange={(e) => setData('remember', e.target.checked)}
+                    />
+                </Form.Group>
 
                 <Form.Group className="mt-4">
                     <div className="d-flex justify-content-between align-items-center mb-4">

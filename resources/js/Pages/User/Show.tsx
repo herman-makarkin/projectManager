@@ -17,10 +17,10 @@ const Show = ({ user }: { user: UserProps }) => {
                 </div>
             }
         >
-            <Head title={`User "${user.name}"`} />
-            <div className="bg-gray">
+            <Head title={`User '${user.name}'`} />
+            <div>
                 {/* <div>
-                    <img src={user.image_path} alt="" />
+                    <img src={user.image_path} alt='' />
                 </div> */}
                 <div>
                     {/* <label>User Name</label> */}

@@ -5,6 +5,7 @@ import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
+import { Form } from 'react-bootstrap';
 
 export default function ResetPassword({
     token,
@@ -32,7 +33,7 @@ export default function ResetPassword({
         <GuestLayout>
             <Head title="Reset Password" />
 
-            <form onSubmit={submit}>
+            <Form onSubmit={submit}>
                 <div>
                     <InputLabel htmlFor="email" value="Email" />
 
@@ -94,7 +95,7 @@ export default function ResetPassword({
                         Reset Password
                     </PrimaryButton>
                 </div>
-            </form>
+            </Form>
         </GuestLayout>
     );
 }

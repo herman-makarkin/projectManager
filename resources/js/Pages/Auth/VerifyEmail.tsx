@@ -2,7 +2,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
-
+import { Form } from 'react-bootstrap';
 export default function VerifyEmail({ status }: { status?: string }) {
     const { post, processing } = useForm({});
 
@@ -30,7 +30,7 @@ export default function VerifyEmail({ status }: { status?: string }) {
                 </div>
             )}
 
-            <form onSubmit={submit}>
+            <Form onSubmit={submit}>
                 <div className="mt-4 flex items-center justify-between">
                     <PrimaryButton disabled={processing}>
                         Resend Verification Email
@@ -45,7 +45,7 @@ export default function VerifyEmail({ status }: { status?: string }) {
                         Log Out
                     </Link>
                 </div>
-            </form>
+            </Form>
         </GuestLayout>
     );
 }

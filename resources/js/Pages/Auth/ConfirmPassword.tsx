@@ -5,6 +5,7 @@ import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
+import { Form } from 'react-bootstrap';
 
 export default function ConfirmPassword() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -28,7 +29,7 @@ export default function ConfirmPassword() {
                 password before continuing.
             </div>
 
-            <form onSubmit={submit}>
+            <Form onSubmit={submit}>
                 <div className="mt-4">
                     <InputLabel htmlFor="password" value="Password" />
 
@@ -50,7 +51,7 @@ export default function ConfirmPassword() {
                         Confirm
                     </PrimaryButton>
                 </div>
-            </form>
+            </Form>
         </GuestLayout>
     );
 }

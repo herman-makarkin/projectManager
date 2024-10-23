@@ -77,8 +77,8 @@ export default function Dashboard({
                             <td scope="col">Status</td>
                             <td scope="col">Creation date</td>
                             <td scope="col">Deadline</td>
-                            {/* <td scope="col">
-                                <p className="text-end">Actions</p>
+                            {/* <td scope='col'>
+                                <p className='text-end'>Actions</p>
                             </td> */}
                         </tr>
                     </thead>
@@ -124,15 +124,15 @@ export default function Dashboard({
                                 <td className="align-middle">
                                     {task.deadline}
                                 </td>
-                                {/* <td className="align-middle">
+                                {/* <td className='align-middle'>
                                     <Link
-                                        className="text-success"
+                                        className='text-success'
                                         href={route('task.edit', task.id)}
                                     >
                                         Edit
                                     </Link>
                                     <button
-                                        className="text-danger ms-2"
+                                        className='text-danger ms-2'
                                         onClick={() => removeTask(task)}
                                     >
                                         Destroy

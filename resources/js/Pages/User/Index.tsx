@@ -87,7 +87,7 @@ export default function Index({
                             >
                                 ID
                             </TableHeading>
-                            {/* <td scope="col">Image</td> */}
+                            {/* <td scope='col'>Image</td> */}
                             <TableHeading
                                 name="name"
                                 sortChanged={sortChanged}
@@ -141,7 +141,7 @@ export default function Index({
                     <thead>
                         <tr>
                             <th scope="col"></th>
-                            {/* <td scope="col"></td> */}
+                            {/* <td scope='col'></td> */}
                             <td scope="col">
                                 <TextInput
                                     placeholder="User name"
@@ -179,12 +179,12 @@ export default function Index({
                                     {user.id}
                                 </th>
                                 {/* <td
-                                    className="align-middle"
+                                    className='align-middle'
                                     style={{
                                         maxWidth: 100,
                                     }}
                                 >
-                                    <img src={user.image_path} alt="" />
+                                    <img src={user.image_path} alt='' />
                                 </td> */}
                                 <td className="align-middle">
                                     <Link href={route('user.show', user.id)}>

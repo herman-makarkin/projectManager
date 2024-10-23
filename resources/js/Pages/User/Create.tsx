@@ -6,6 +6,7 @@ import Authenticated from '@/Layouts/AuthenticatedLayout';
 import { UserProps } from '@/props';
 import { Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
+import { Form } from 'react-bootstrap';
 
 const Create = () => {
     const { data, setData, post, errors } = useForm<UserProps>({
@@ -27,16 +28,16 @@ const Create = () => {
         <Authenticated
             header={<h2 className="text-gray fs-3">Create new User</h2>}
         >
-            <form onSubmit={onSubmit}>
+            <Form onSubmit={onSubmit}>
                 {/* <div>
                     <InputLabel
-                        htmlFor="user_image_path"
-                        value="User Image"
+                        htmlFor='user_image_path'
+                        value='User Image'
                     />
                     <TextInput
-                        id="user_image_path"
-                        type="file"
-                        name="image"
+                        id='user_image_path'
+                        type='file'
+                        name='image'
                         onChange={(e) => setData('image', e.target.files[0])}
                     />
                     <InputError message={errors.image} />
@@ -77,12 +78,12 @@ const Create = () => {
                 </div>
                 {/* <div>
                     <InputLabel
-                        htmlFor="user_description"
-                        value="Description"
+                        htmlFor='user_description'
+                        value='Description'
                     />
                     <TextAreaInput
-                        id="user_description"
-                        name="description"
+                        id='user_description'
+                        name='description'
                         value={data.description}
                         onChange={(e) => setData('description', e.target.value)}
                     />
@@ -143,7 +144,7 @@ const Create = () => {
                         value="Submit"
                     />
                 </div>
-            </form>
+            </Form>
         </Authenticated>
     );
 };

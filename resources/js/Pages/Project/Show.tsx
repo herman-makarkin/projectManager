@@ -6,6 +6,7 @@ import {
 import Authenticated from '@/Layouts/AuthenticatedLayout';
 import { Project, queryParamsProps, TaskData } from '@/props';
 import { Head, Link } from '@inertiajs/react';
+import { Col, Row } from 'react-bootstrap';
 import TasksTable from '../Task/TasksTable';
 
 const Show = ({
@@ -32,13 +33,13 @@ const Show = ({
                 </div>
             }
         >
-            <Head title={`Project "${project.name}"`} />
-            <div className="bg-gray mb-5">
+            <Head title={`Project '${project.name}'`} />
+            <div className="mb-5 px-1">
                 <div className="" style={{ width: '38%' }}>
                     <img src={project.image_path} alt="" />
                 </div>
-                <div className="row row-cols-1 row-cols-md-2">
-                    <div className="col">
+                <Row xs={1} md={2}>
+                    <Col>
                         <div className="mt-4">
                             <label className="fs-3 fw-bold">Task ID</label>
                             <p className="fs-3">{project.id}</p>
@@ -71,10 +72,10 @@ const Show = ({
                             </label>
                             <p className="fs-3">{project.description}</p>
                         </div>
-                    </div>
-                    <div className="col">
-                        {/* <div className="mt-4">
-                            <label className="fs-3 fw-bold">
+                    </Col>
+                    <Col>
+                        {/* <div className='mt-4'>
+                            <label className='fs-3 fw-bold'>
                                 Task priority
                             </label>
                             <p
@@ -98,8 +99,8 @@ const Show = ({
                             <label className="fs-3 fw-bold">Updated By</label>
                             <p className="fs-3">{project.updated_by.name}</p>
                         </div>
-                    </div>
-                </div>
+                    </Col>
+                </Row>
             </div>
             <TasksTable
                 tasks={tasks}

@@ -4,6 +4,7 @@ import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
+import { Form } from 'react-bootstrap';
 
 export default function ForgotPassword({ status }: { status?: string }) {
     const { data, setData, post, processing, errors } = useForm({
@@ -32,7 +33,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
                 </div>
             )}
 
-            <form onSubmit={submit}>
+            <Form onSubmit={submit}>
                 <TextInput
                     id="email"
                     type="email"
@@ -50,7 +51,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
                         Email Password Reset Link
                     </PrimaryButton>
                 </div>
-            </form>
+            </Form>
         </GuestLayout>
     );
 }

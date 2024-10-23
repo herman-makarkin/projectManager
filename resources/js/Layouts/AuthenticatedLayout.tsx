@@ -1,16 +1,13 @@
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import NavLink from '@/Components/NavLink';
 import { Link, usePage } from '@inertiajs/react';
-import { PropsWithChildren, ReactNode, useState } from 'react';
+import { PropsWithChildren, ReactNode } from 'react';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 export default function Authenticated({
     header,
     children,
 }: PropsWithChildren<{ header?: ReactNode }>) {
     const user = usePage().props.auth.user;
-
-    const [showingNavigationDropdown, setShowingNavigationDropdown] =
-        useState(false);
 
     return (
         <>
@@ -58,6 +55,12 @@ export default function Authenticated({
                             >
                                 Users
                             </NavLink>
+                            <NavLink
+                                href={route('task.myTasks')}
+                                active={route().current('task.myTasks')}
+                            >
+                                My Tasks
+                            </NavLink>
                         </Nav>
 
                         <NavDropdown
@@ -84,9 +87,7 @@ export default function Authenticated({
 
             {header && (
                 <header className="bg-white pt-5 shadow">
-                    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                        {header}
-                    </div>
+                    <div className="w-100 container mt-5 pb-4">{header}</div>
                 </header>
             )}
 

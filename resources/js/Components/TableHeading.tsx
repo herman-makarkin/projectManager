@@ -1,5 +1,6 @@
 import { PropsWithChildren } from 'react';
 import Arrow from './Arrow';
+type sortChanged = (name: string) => void;
 
 const TableHeading = ({
     sort_field = '',
@@ -13,7 +14,7 @@ const TableHeading = ({
     sort_mode?: string;
     name?: string;
     sortable: boolean;
-    sortChanged?: Function;
+    sortChanged?: sortChanged;
 }>) => {
     return (
         <th

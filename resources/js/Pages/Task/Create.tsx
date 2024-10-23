@@ -7,6 +7,7 @@ import Authenticated from '@/Layouts/AuthenticatedLayout';
 import { ProjectData, TaskProps, UserData } from '@/props';
 import { Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
+import { Form } from 'react-bootstrap';
 
 const Create = ({
     projects,
@@ -34,8 +35,8 @@ const Create = ({
         <Authenticated
             header={<h2 className="text-gray fs-3">Create new Task</h2>}
         >
-            <form onSubmit={onSubmit}>
-                <div>
+            <Form onSubmit={onSubmit}>
+                <Form.Group>
                     <InputLabel htmlFor="task_image_path" value="Task Image" />
                     <TextInput
                         id="task_image_path"
@@ -47,8 +48,8 @@ const Create = ({
                         }}
                     />
                     <InputError message={errors.image} />
-                </div>
-                <div>
+                </Form.Group>
+                <Form.Group>
                     <InputLabel htmlFor="task_name" value="Task Name" />
                     <TextInput
                         id="task_name"
@@ -59,8 +60,8 @@ const Create = ({
                         onChange={(e) => setData('name', e.target.value)}
                     />
                     <InputError message={errors.name} />
-                </div>
-                <div>
+                </Form.Group>
+                <Form.Group>
                     <InputLabel htmlFor="task_deadline" value="Deadline" />
                     <TextInput
                         id="task_deadline"
@@ -70,8 +71,8 @@ const Create = ({
                         onChange={(e) => setData('deadline', e.target.value)}
                     />
                     <InputError message={errors.name} />
-                </div>
-                <div>
+                </Form.Group>
+                <Form.Group>
                     <InputLabel
                         htmlFor="task_description"
                         value="Description"
@@ -83,8 +84,8 @@ const Create = ({
                         onChange={(e) => setData('description', e.target.value)}
                     />
                     <InputError message={errors.description} />
-                </div>
-                <div>
+                </Form.Group>
+                <Form.Group>
                     <InputLabel htmlFor="task_priority" value="Priority" />
 
                     <SelectInput
@@ -95,8 +96,8 @@ const Create = ({
                         onChange={(e) => setData('priority', e.target.value)}
                     ></SelectInput>
                     <InputError message={errors.priority} />
-                </div>
-                <div>
+                </Form.Group>
+                <Form.Group>
                     <InputLabel htmlFor="task_status" value="status" />
 
                     <SelectInput
@@ -107,8 +108,8 @@ const Create = ({
                         onChange={(e) => setData('status', e.target.value)}
                     ></SelectInput>
                     <InputError message={errors.status} />
-                </div>
-                <div>
+                </Form.Group>
+                <Form.Group>
                     <InputLabel htmlFor="task_project_id" value="Project id" />
 
                     <SelectInput
@@ -126,8 +127,8 @@ const Create = ({
                     </SelectInput>
 
                     <InputError message={errors.project_id} />
-                </div>
-                <div>
+                </Form.Group>
+                <Form.Group>
                     <InputLabel
                         htmlFor="task_assigned_user_id"
                         value="assigned user id"
@@ -150,8 +151,8 @@ const Create = ({
                     </SelectInput>
 
                     <InputError message={errors.assigned_user_id} />
-                </div>
-                <div>
+                </Form.Group>
+                <Form.Group>
                     <Link href={route('task.index')} className="btn btn-danger">
                         Cancel
                     </Link>
@@ -160,8 +161,8 @@ const Create = ({
                         className="btn btn-success"
                         value="Submit"
                     />
-                </div>
-            </form>
+                </Form.Group>
+            </Form>
         </Authenticated>
     );
 };

@@ -16,7 +16,7 @@ export default function Index({
             //user={auth.user}
             header={
                 <div className="d-flex justify-content-between">
-                    <h2 className="text-gray fs-3">Tasks</h2>
+                    <h2 className="fs-3">Tasks</h2>
                     <Link
                         href={route('task.create')}
                         className="btn btn-success"
