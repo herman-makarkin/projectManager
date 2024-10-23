@@ -9,6 +9,7 @@ export default function Authenticated({
     children,
 }: PropsWithChildren<{ header?: ReactNode; padding?: boolean }>) {
     const user = usePage().props.auth.user;
+    const containerStyle = 'mt-3  shadow ' + (padding ? 'p-3 pt-4' : 'p-0');
 
     return (
         <>
@@ -93,9 +94,7 @@ export default function Authenticated({
                 </header>
             )}
 
-            <Container className={'mt-3 py-3 shadow ' + padding ? 'p-0' : ''}>
-                {children}
-            </Container>
+            <Container className={containerStyle}>{children}</Container>
         </>
     );
 }
