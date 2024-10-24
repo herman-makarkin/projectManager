@@ -10,7 +10,8 @@
 # Welcome to my Project Manager!
 
 This web Application is designed to manage all your projects and tasks in a convenient way.
-if you want to run this on you localhost you may run
+
+if you want to run this on your localhost you may run
 
 ``` 
 git clone https://github.com/herman-makarkin/projectManager 
